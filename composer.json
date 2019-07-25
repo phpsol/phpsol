@@ -40,9 +40,13 @@
         "test": [
             "vendor/bin/phpunit tests"
         ],
-        "cs": [
+        "compile": [
+            "vendor/bin/phpcs --standard=vendor/doctrine/coding-standard/lib/Doctrine/ruleset.xml src tests",
             "vendor/bin/phpstan analyse src tests --level=max",
             "vendor/bin/psalm"
+        ],
+        "fix": [
+            "vendor/bin/phpcbf --standard=vendor/doctrine/coding-standard/lib/Doctrine/ruleset.xml src tests"
         ]
     }
 }

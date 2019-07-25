@@ -2,7 +2,7 @@
 PHP Standard Object Library
 
 ## Development
-### Testing
-Run `composer test` to run all tests.
-### Coding standards
-Run `composer cs` to validate the code.
+### Tools
+* `composer test` - Execute all tests
+* `composer compile` - Run static code analysis tools and validate against coding standards
+* `composer fix` - Fix coding standard errors if possible
