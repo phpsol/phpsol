@@ -18,7 +18,7 @@ final class StringObjectTest extends TestCase
         self::assertSame($value, $stringObject->value());
     }
 
-    public function equals() : void
+    public function testEquals() : void
     {
         $sameA = new StringObject('same');
         $sameB = new StringObject('same');
