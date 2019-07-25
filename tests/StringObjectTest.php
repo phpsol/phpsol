@@ -18,6 +18,18 @@ final class StringObjectTest extends TestCase
         self::assertSame($value, $stringObject->value());
     }
 
+    public function equals() : void
+    {
+        $sameA = new StringObject('same');
+        $sameB = new StringObject('same');
+        $different = new StringObject('different');
+
+        self::assertTrue($sameA->equals($sameB));
+        self::assertTrue($sameB->equals($sameA));
+        self::assertFalse($sameA->equals($different));
+        self::assertFalse($different->equals($sameA));
+    }
+
     public function testToString() : void
     {
         $value = 'string';
