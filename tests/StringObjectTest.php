@@ -30,6 +30,16 @@ final class StringObjectTest extends TestCase
         self::assertFalse($different->equals($sameA));
     }
 
+    public function testExplode() : void
+    {
+        $stringObject = new StringObject('a,b');
+
+        $exploded = $stringObject->explode(',');
+        self::assertCount(2, $exploded);
+        self::assertSame('a', $exploded[0]);
+        self::assertSame('b', $exploded[1]);
+    }
+
     public function testToString() : void
     {
         $value = 'string';

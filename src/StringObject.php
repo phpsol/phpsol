@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Phpsol;
 
+use function explode;
+
 final class StringObject
 {
     /** @var string */
@@ -22,6 +24,16 @@ final class StringObject
     public function equals(self $other) : bool
     {
         return $this->value() === $other->value();
+    }
+
+    /**
+     * @return array<string>
+     */
+    public function explode(string $delimiter) : array
+    {
+        $exploded = explode($delimiter, $this->value());
+
+        return $exploded === false ? [] : $exploded;
     }
 
     public function __toString() : string
