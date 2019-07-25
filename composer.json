@@ -22,7 +22,6 @@
         "sensiolabs/security-checker": "^6.0",
         "doctrine/coding-standard": "^6.0",
         "phpunit/phpunit": "^8.2",
-        "infection/infection": "^0.13.4",
         "squizlabs/php_codesniffer": "^3.4",
         "phpstan/phpstan": "^0.11.12",
         "vimeo/psalm": "^3.4"
@@ -36,5 +35,14 @@
         "psr-4": {
             "Phpsol\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "test": [
+            "vendor/bin/phpunit tests"
+        ],
+        "cs": [
+            "vendor/bin/phpstan analyse src tests --level=max",
+            "vendor/bin/psalm"
+        ]
     }
 }
