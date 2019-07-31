@@ -11,11 +11,11 @@ final class TextTest extends TestCase
 {
     public function testValue() : void
     {
-        $value = 'string';
+        $value = 'value';
 
         $text = new Text($value);
 
-        self::assertSame($value, $text->value());
+        self::assertSame($value, $text->toString());
     }
 
     public function testEquals() : void
@@ -38,25 +38,25 @@ final class TextTest extends TestCase
         $concatenated = $a->concatenate($b);
 
         self::assertSame(Text::class, \get_class($concatenated));
-        self::assertEquals($a . $b, $concatenated->value());
+        self::assertEquals($a . $b, $concatenated->toString());
     }
 
     public function testContains() : void
     {
-        $text = new Text('text');
+        $text = new Text('value');
 
-        self::assertTrue($text->contains(new Text('e')));
-        self::assertTrue($text->contains(new Text('text')));
-        self::assertFalse($text->contains(new Text('a')));
-        self::assertFalse($text->contains(new Text('texta')));
-        self::assertFalse($text->contains(new Text('Text')));
+        self::assertTrue($text->contains(new Text('a')));
+        self::assertTrue($text->contains(new Text('value')));
+        self::assertFalse($text->contains(new Text('b')));
+        self::assertFalse($text->contains(new Text('valuea')));
+        self::assertFalse($text->contains(new Text('Value')));
     }
 
     public function testLength() : void
     {
-        $text = new Text('text');
+        $text = new Text('value');
 
-        self::assertSame(4, $text->length());
+        self::assertSame(5, $text->length());
     }
 
     public function testReplace() : void
@@ -72,7 +72,7 @@ final class TextTest extends TestCase
     {
         $text = new Text('a,b');
 
-        $parts = $text->split(',');
+        $parts = $text->split(new Text(','));
 
         self::assertCount(2, $parts);
 
@@ -85,7 +85,7 @@ final class TextTest extends TestCase
 
     public function testToString() : void
     {
-        $value = 'string';
+        $value = 'value';
 
         $text = new Text($value);
 

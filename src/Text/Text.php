@@ -14,44 +14,44 @@ final class Text
         $this->value = $value;
     }
 
-    public function value() : string
+    public function toString() : string
     {
         return $this->value;
     }
 
     public function equals(self $text) : bool
     {
-        return $this->value() === $text->value();
+        return $this->toString() === $text->toString();
     }
 
     public function concatenate(self $text) : self
     {
-        return new Text($this->value() . $text->value());
+        return new Text($this->toString() . $text->toString());
     }
 
     public function contains(self $text) : bool
     {
-        $contains = \strpos($this->value(), $text->value());
+        $contains = \strpos($this->toString(), $text->toString());
 
         return \is_int($contains);
     }
 
     public function length() : int
     {
-        return \strlen($this->value());
+        return \strlen($this->toString());
     }
 
     public function replace(Text $target, Text $replacement) : self
     {
-        return new Text(\str_replace($target->value(), $replacement->value(), $this->value()));
+        return new Text(\str_replace($target->toString(), $replacement->toString(), $this->toString()));
     }
 
     /**
      * @return array<self>
      */
-    public function split(string $delimiter) : array
+    public function split(Text $delimiter) : array
     {
-        $parts = \explode($delimiter, $this->value());
+        $parts = \explode($delimiter->toString(), $this->toString());
 
         if ($parts === false) {
             return [clone $this];
@@ -67,6 +67,6 @@ final class Text
 
     public function __toString() : string
     {
-        return $this->value();
+        return $this->toString();
     }
 }
