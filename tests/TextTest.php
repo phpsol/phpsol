@@ -30,6 +30,28 @@ final class TextTest extends TestCase
         self::assertFalse($different->equals($sameA));
     }
 
+    public function testConcatenate() : void
+    {
+        $a = new Text('a');
+        $b = new Text('b');
+
+        $concatenated = $a->concatenate($b);
+
+        self::assertSame(Text::class, \get_class($concatenated));
+        self::assertEquals($a . $b, $concatenated->value());
+    }
+
+    public function testContains() : void
+    {
+        $text = new Text('text');
+
+        self::assertTrue($text->contains(new Text('e')));
+        self::assertTrue($text->contains(new Text('text')));
+        self::assertFalse($text->contains(new Text('a')));
+        self::assertFalse($text->contains(new Text('texta')));
+        self::assertFalse($text->contains(new Text('Text')));
+    }
+
     public function testExplode() : void
     {
         $text = new Text('a,b');
@@ -38,10 +60,10 @@ final class TextTest extends TestCase
 
         self::assertCount(2, $parts);
 
-        self::assertSame(\get_class($parts[0]), Text::class);
+        self::assertSame(Text::class, \get_class($parts[0]));
         self::assertEquals(new Text('a'), $parts[0]);
 
-        self::assertSame(\get_class($parts[1]), Text::class);
+        self::assertSame(Text::class, \get_class($parts[1]));
         self::assertEquals(new Text('b'), $parts[1]);
     }
 

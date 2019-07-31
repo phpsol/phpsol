@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Phpsol;
 
+use function is_int;
+use function strpos;
+
 final class Text
 {
     /** @var string */
@@ -22,6 +25,18 @@ final class Text
     public function equals(self $text) : bool
     {
         return $this->value() === $text->value();
+    }
+
+    public function concatenate(self $text) : self
+    {
+        return new Text($this->value() . $text->value());
+    }
+
+    public function contains(self $text) : bool
+    {
+        $contains = strpos($this->value(), $text->value());
+
+        return is_int($contains);
     }
 
     /**
