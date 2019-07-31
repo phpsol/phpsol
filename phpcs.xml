@@ -9,5 +9,11 @@
     <!-- Import Doctrine coding standard (base) -->
     <rule ref="Doctrine">
         <exclude name="Generic.Formatting.MultipleStatementAlignment"/>
+        <exclude name="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions"/>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly">
+        <properties>
+            <property name="allowFullyQualifiedGlobalFunctions" value="true"/>
+        </properties>
     </rule>
 </ruleset>

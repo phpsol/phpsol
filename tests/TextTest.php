@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace Phpsol\Tests;
 
-use Phpsol\StringObject;
+use Phpsol\Text;
 use PHPUnit\Framework\TestCase;
 
-final class StringObjectTest extends TestCase
+final class TextTest extends TestCase
 {
     public function testValue() : void
     {
         $value = 'string';
 
-        $stringObject = new StringObject($value);
+        $text = new Text($value);
 
-        self::assertSame($value, $stringObject->value());
+        self::assertSame($value, $text->value());
     }
 
     public function testEquals() : void
     {
-        $sameA = new StringObject('same');
-        $sameB = new StringObject('same');
-        $different = new StringObject('different');
+        $sameA = new Text('same');
+        $sameB = new Text('same');
+        $different = new Text('different');
 
         self::assertTrue($sameA->equals($sameB));
         self::assertTrue($sameB->equals($sameA));
@@ -32,9 +32,9 @@ final class StringObjectTest extends TestCase
 
     public function testExplode() : void
     {
-        $stringObject = new StringObject('a,b');
+        $text = new Text('a,b');
 
-        $exploded = $stringObject->explode(',');
+        $exploded = $text->explode(',');
         self::assertCount(2, $exploded);
         self::assertSame('a', $exploded[0]);
         self::assertSame('b', $exploded[1]);
@@ -44,10 +44,10 @@ final class StringObjectTest extends TestCase
     {
         $value = 'string';
 
-        $stringObject = new StringObject($value);
+        $text = new Text($value);
 
-        self::assertEquals($value, $stringObject);
-        self::assertSame($value, (string) $stringObject);
-        self::assertSame($value, $stringObject->__toString());
+        self::assertEquals($value, $text);
+        self::assertSame($value, (string) $text);
+        self::assertSame($value, $text->__toString());
     }
 }

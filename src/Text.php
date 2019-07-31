@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Phpsol;
 
-use function explode;
-
-final class StringObject
+final class Text
 {
     /** @var string */
     private $value;
@@ -31,7 +29,7 @@ final class StringObject
      */
     public function explode(string $delimiter) : array
     {
-        $exploded = explode($delimiter, $this->value());
+        $exploded = \explode($delimiter, $this->value());
 
         return $exploded === false ? [] : $exploded;
     }
