@@ -19,19 +19,27 @@ final class Text
         return $this->value;
     }
 
-    public function equals(self $other) : bool
+    public function equals(self $text) : bool
     {
-        return $this->value() === $other->value();
+        return $this->value() === $text->value();
     }
 
     /**
-     * @return array<string>
+     * @return array<self>
      */
     public function explode(string $delimiter) : array
     {
-        $exploded = \explode($delimiter, $this->value());
+        $parts = \explode($delimiter, $this->value());
 
-        return $exploded === false ? [] : $exploded;
+        if ($parts === false) {
+            return [$this->value()];
+        }
+
+        foreach ($parts as $index => $part) {
+            $parts[$index] = new Text($part);
+        }
+
+        return $parts;
     }
 
     public function __toString() : string

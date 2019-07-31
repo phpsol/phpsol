@@ -34,10 +34,15 @@ final class TextTest extends TestCase
     {
         $text = new Text('a,b');
 
-        $exploded = $text->explode(',');
-        self::assertCount(2, $exploded);
-        self::assertSame('a', $exploded[0]);
-        self::assertSame('b', $exploded[1]);
+        $parts = $text->explode(',');
+
+        self::assertCount(2, $parts);
+
+        self::assertSame(\get_class($parts[0]), Text::class);
+        self::assertEquals(new Text('a'), $parts[0]);
+
+        self::assertSame(\get_class($parts[1]), Text::class);
+        self::assertEquals(new Text('b'), $parts[1]);
     }
 
     public function testToString() : void
