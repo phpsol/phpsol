@@ -54,14 +54,15 @@ final class Text
         $parts = \explode($delimiter, $this->value());
 
         if ($parts === false) {
-            return [$this->value()];
+            return [clone $this];
         }
 
-        foreach ($parts as $index => $part) {
-            $parts[$index] = new Text($part);
-        }
-
-        return $parts;
+        return \array_map(
+            static function ($part) {
+                return new Text($part);
+            },
+            $parts
+        );
     }
 
     public function __toString() : string
