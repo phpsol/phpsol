@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Phpsol;
 
-use function is_int;
-use function strpos;
-
 final class Text
 {
     /** @var string */
@@ -34,15 +31,25 @@ final class Text
 
     public function contains(self $text) : bool
     {
-        $contains = strpos($this->value(), $text->value());
+        $contains = \strpos($this->value(), $text->value());
 
-        return is_int($contains);
+        return \is_int($contains);
+    }
+
+    public function length() : int
+    {
+        return \strlen($this->value());
+    }
+
+    public function replace(Text $target, Text $replacement) : self
+    {
+        return new Text(\str_replace($target->value(), $replacement->value(), $this->value()));
     }
 
     /**
      * @return array<self>
      */
-    public function explode(string $delimiter) : array
+    public function split(string $delimiter) : array
     {
         $parts = \explode($delimiter, $this->value());
 

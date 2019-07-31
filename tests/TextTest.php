@@ -52,11 +52,27 @@ final class TextTest extends TestCase
         self::assertFalse($text->contains(new Text('Text')));
     }
 
-    public function testExplode() : void
+    public function testLength() : void
+    {
+        $text = new Text('text');
+
+        self::assertSame(4, $text->length());
+    }
+
+    public function testReplace() : void
+    {
+        $text = new Text('a_A_a');
+
+        $replaced = $text->replace(new Text('a'), new Text('b'));
+
+        self::assertEquals(new Text('b_A_b'), $replaced);
+    }
+
+    public function testSplit() : void
     {
         $text = new Text('a,b');
 
-        $parts = $text->explode(',');
+        $parts = $text->split(',');
 
         self::assertCount(2, $parts);
 
