@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phpsol;
+namespace Phpsol\Text;
 
 final class Text
 {

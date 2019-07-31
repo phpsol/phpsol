@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Phpsol\Tests;
+namespace Phpsol\Text\Tests;
 
-use Phpsol\Text;
+use Phpsol\Text\Text;
 use PHPUnit\Framework\TestCase;
 
 final class TextTest extends TestCase
