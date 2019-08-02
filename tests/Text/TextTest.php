@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phpsol\Text\Tests;
+namespace Phpsol\Tests\Text;
 
 use Phpsol\Text\Text;
 use PHPUnit\Framework\TestCase;
