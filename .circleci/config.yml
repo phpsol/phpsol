@@ -1,0 +1,50 @@
+version: 2.1
+
+executors:
+    php:
+        docker:
+            -   image: circleci/php:7.3
+        working_directory: ~/phpsol
+
+jobs:
+    build:
+        executor: php
+        steps:
+            - checkout
+            -   restore_cache:
+                    keys:
+                        - v1-composer-{{ checksum "composer.lock" }}
+                        - v1-composer-
+            -   run: composer install -n --prefer-dist
+            -   save_cache:
+                    key: v1-composer-{{ checksum "composer.lock" }}
+                    paths:
+                        - ~/phpsol/vendor
+            -   persist_to_workspace:
+                    root: .
+                    paths: .
+
+    compile:
+        executor: php
+        steps:
+            -   attach_workspace:
+                    at: ~/phpsol
+            -   run: composer compile
+    test:
+        executor: php
+        steps:
+            -   attach_workspace:
+                    at: ~/phpsol
+            -   run: composer test
+
+workflows:
+    version: 2
+    workflow:
+        jobs:
+            - build
+            -   compile:
+                    requires:
+                        - build
+            -   test:
+                    requires:
+                        - build
