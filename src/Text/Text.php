@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace Phpsol\Text;
 
+use function array_map;
+use function explode;
+use function is_int;
+use function str_replace;
+use function strlen;
+use function strpos;
+
 final class Text
 {
     /** @var string */
@@ -36,19 +43,19 @@ final class Text
 
     public function contains(self $text) : bool
     {
-        $contains = \strpos($this->toString(), $text->toString());
+        $contains = strpos($this->toString(), $text->toString());
 
-        return \is_int($contains);
+        return is_int($contains);
     }
 
     public function length() : int
     {
-        return \strlen($this->toString());
+        return strlen($this->toString());
     }
 
     public function replace(Text $target, Text $replacement) : self
     {
-        return new Text(\str_replace($target->toString(), $replacement->toString(), $this->toString()));
+        return new Text(str_replace($target->toString(), $replacement->toString(), $this->toString()));
     }
 
     /**
@@ -56,13 +63,13 @@ final class Text
      */
     public function split(Text $delimiter) : array
     {
-        $parts = \explode($delimiter->toString(), $this->toString());
+        $parts = explode($delimiter->toString(), $this->toString());
 
         if ($parts === false) {
             return [clone $this];
         }
 
-        return \array_map(
+        return array_map(
             static function ($part) {
                 return new Text($part);
             },
