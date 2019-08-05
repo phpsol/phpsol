@@ -6,6 +6,7 @@ namespace Phpsol\Tests\Text;
 
 use Phpsol\Text\Text;
 use PHPUnit\Framework\TestCase;
+use function get_class;
 
 final class TextTest extends TestCase
 {
@@ -37,7 +38,7 @@ final class TextTest extends TestCase
 
         $concatenated = $a->concatenate($b);
 
-        self::assertSame(Text::class, \get_class($concatenated));
+        self::assertSame(Text::class, get_class($concatenated));
         self::assertEquals($a . $b, $concatenated->toString());
     }
 
@@ -76,10 +77,10 @@ final class TextTest extends TestCase
 
         self::assertCount(2, $parts);
 
-        self::assertSame(Text::class, \get_class($parts[0]));
+        self::assertSame(Text::class, get_class($parts[0]));
         self::assertEquals(Text::fromString('a'), $parts[0]);
 
-        self::assertSame(Text::class, \get_class($parts[1]));
+        self::assertSame(Text::class, get_class($parts[1]));
         self::assertEquals(Text::fromString('b'), $parts[1]);
     }
 
