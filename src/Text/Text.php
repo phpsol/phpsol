@@ -59,7 +59,9 @@ final class Text
     }
 
     /**
-     * @return array<self>
+     * @return self[]
+     *
+     * @psalm-return array<self>
      */
     public function split(Text $delimiter) : array
     {
