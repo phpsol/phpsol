@@ -6,6 +6,8 @@ namespace Phpsol\Collection;
 
 use Countable;
 use IteratorAggregate;
+use Phpsol\Collection\Exception\DuplicateElement;
+use Phpsol\Collection\Exception\UnexpectedType;
 
 /**
  * @template T of object
@@ -13,6 +15,9 @@ use IteratorAggregate;
 interface Collection extends IteratorAggregate, Countable
 {
     /**
+     * @throws DuplicateElement
+     * @throws UnexpectedType
+     *
      * @psalm-param T $element
      */
     public function add(object $element) : void;
@@ -29,6 +34,10 @@ interface Collection extends IteratorAggregate, Countable
      */
     public function contains(object $element) : bool;
 
+    /**
+     * Checks if all elements in the collection are identical (strict comparison)
+     * and if all elements exist in the same order.
+     */
     public function equals(self $collection) : bool;
 
     public function isEmpty() : bool;

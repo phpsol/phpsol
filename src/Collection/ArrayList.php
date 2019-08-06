@@ -6,7 +6,11 @@ namespace Phpsol\Collection;
 
 use ArrayIterator;
 use Iterator;
-use Phpsol\Collection\Exception\InvalidType;
+use Phpsol\Collection\Exception\DuplicateElement;
+use Phpsol\Collection\Exception\InvalidClass;
+use Phpsol\Collection\Exception\UnexpectedType;
+use function array_values;
+use function class_exists;
 use function count;
 use function is_a;
 use function spl_object_hash;
@@ -30,42 +34,48 @@ final class ArrayList implements Collection
      * @var string
      * @psalm-var class-string
      */
-    private $allowedClass;
+    private $class;
 
     /**
+     * @param string $class The class which all elements must implement.
      * @param mixed[] $elements
+     *
+     * @throws InvalidClass
+     * @throws DuplicateElement
+     * @throws UnexpectedType
      *
      * @psalm-param class-string<T> $allowedClass
      * @psalm-param array<T> $elements
      */
-    public function __construct(string $allowedClass, array $elements = [], ?Iterator $iterator = null)
+    public function __construct(string $class, array $elements = [], ?Iterator $iterator = null)
     {
-        $this->allowedClass = $allowedClass;
-        $this->elements = $elements;
+        if (!class_exists($class)) {
+            throw InvalidClass::notExists($class);
+        }
+
+        $this->class = $class;
         $this->iterator = $iterator ?? new ArrayIterator();
+
+        foreach ($elements as $element) {
+            $this->add($element);
+        }
     }
 
-    /**
-     * @inheritDoc
-     */
     public function add(object $element) : void
     {
+        if ($this->contains($element)) {
+            throw DuplicateElement::create();
+        }
+
         if (!$this->isAllowed($element)) {
-            throw InvalidType::create($this->allowedClass, $element);
+            throw UnexpectedType::create($this->class, $element);
         }
 
         $this->elements[$this->hash($element)] = $element;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function remove(object $element) : void
     {
-        if (!$this->contains($element)) {
-            return; // throw expection?
-        }
-
         unset($this->elements[$this->hash($element)]);
     }
 
@@ -91,7 +101,17 @@ final class ArrayList implements Collection
 
     public function equals(Collection $collection) : bool
     {
-        // TODO
+        if ($collection->count() !== $this->count()) {
+            return false;
+        }
+
+        foreach ($collection as $hash => $element) {
+            if (!$this->contains($element)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public function isEmpty() : bool
@@ -104,12 +124,12 @@ final class ArrayList implements Collection
      */
     public function toArray() : array
     {
-        return $this->elements;
+        return array_values($this->elements);
     }
 
     private function isAllowed(object $element) : bool
     {
-        return is_a($element, $this->allowedClass);
+        return is_a($element, $this->class);
     }
 
     private function hash(object $element) : string

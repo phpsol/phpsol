@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Phpsol\Collection\Exception;
 
-use InvalidArgumentException;
+use UnexpectedValueException;
 use function get_class;
 use function sprintf;
 
-final class InvalidType extends InvalidArgumentException
+final class UnexpectedType extends UnexpectedValueException
 {
     /**
      * @psalm-param class-string $expected
@@ -17,7 +17,7 @@ final class InvalidType extends InvalidArgumentException
     {
         return new self(
             sprintf(
-                'Invalid type. Expected: %s. Actual: %s.',
+                'Expected: %s. Actual: %s.',
                 $expected,
                 get_class($actual)
             )
