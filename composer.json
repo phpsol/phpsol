@@ -46,7 +46,8 @@
             "vendor/bin/psalm"
         ],
         "fix": [
-            "vendor/bin/phpcbf --standard=vendor/doctrine/coding-standard/lib/Doctrine/ruleset.xml src tests"
+            "vendor/bin/phpcbf --standard=vendor/doctrine/coding-standard/lib/Doctrine/ruleset.xml src tests",
+            "vendor/bin/psalm --alter --issues=all"
         ]
     }
 }
