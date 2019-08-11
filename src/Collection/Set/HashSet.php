@@ -101,7 +101,7 @@ final class HashSet implements Set
     }
 
     /**
-     * @return TKey
+     * @return TKey as string
      */
     private function hash(object $element) : string
     {
