@@ -30,7 +30,7 @@ final class HashSet implements Set
      */
     public function __construct(array $elements = [], ?Traversable $iterator = null)
     {
-        /** @psalm-var Traversable<TKey, TValue> */
+        /** @var Traversable<TKey, TValue> */
         $this->iterator = $iterator ?? new ArrayIterator();
 
         foreach ($elements as $element) {

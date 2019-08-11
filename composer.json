@@ -41,8 +41,8 @@
             "vendor/bin/phpunit tests"
         ],
         "compile": [
-            "vendor/bin/phpcs --standard=phpcs.xml src tests",
-            "vendor/bin/phpstan analyse src tests --level=max",
+            "vendor/bin/phpcs --standard=phpcs.xml -s -n src tests",
+            "vendor/bin/phpstan analyse src tests",
             "vendor/bin/psalm"
         ],
         "fix": [
