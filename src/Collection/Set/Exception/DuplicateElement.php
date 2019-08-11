@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Phpsol\Collection\Exception;
+namespace Phpsol\Collection\Set\Exception;
 
-use UnexpectedValueException;
+use InvalidArgumentException;
 
-final class DuplicateElement extends UnexpectedValueException
+final class DuplicateElement extends InvalidArgumentException
 {
     public static function create() : self
     {
