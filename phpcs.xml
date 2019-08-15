@@ -33,15 +33,16 @@
                     @deprecated,
                 "/>
                 <element value="
-                    @link,
-                    @see,
-                    @uses,
+                @link,
+                @see,
+                @uses,
                 "/>
                 <element value="
                     @ORM\,
                     @ODM\,
                     @PHPCR\,
                 "/>
+                <element value="@template"/>
                 <element value="@param,@psalm-param"/>
                 <element value="@return,@psalm-return"/>
                 <element value="@throws"/>
