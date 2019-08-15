@@ -9,6 +9,7 @@ use Phpsol\Collection\Set\Exception\DuplicateElement;
 use Phpsol\Collection\Set\Exception\NonExistentClass;
 use Phpsol\Collection\Set\Exception\UnexpectedType;
 use Traversable;
+use function array_values;
 use function class_exists;
 use function count;
 use function is_a;
@@ -117,19 +118,15 @@ final class HashSet implements Set
     }
 
     /**
-     * @inheritDoc
+     * @return array<int, TValue>
      */
     public function toArray() : array
     {
-        return $this->elements;
+        return array_values($this->elements);
     }
 
-    /**
-     * @return string as string
-     */
     private function hash(object $element) : string
     {
-        /** @var string as string */
         return spl_object_hash($element);
     }
 }
