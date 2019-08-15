@@ -13,6 +13,7 @@ use Phpsol\Collection\Set\Exception\DuplicateElement;
  *
  * @template TKey
  * @template TValue as object
+ *
  * @template-extends IteratorAggregate<TKey, TValue>
  */
 interface Set extends IteratorAggregate, Countable
@@ -44,7 +45,7 @@ interface Set extends IteratorAggregate, Countable
     public function isEmpty() : bool;
 
     /**
-     * @return array<TKey, TValue>
+     * @return array<int|string, TValue>
      */
     public function toArray() : array;
 }
