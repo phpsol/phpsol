@@ -6,31 +6,47 @@ namespace Phpsol\Collection\Set;
 
 use ArrayIterator;
 use Phpsol\Collection\Set\Exception\DuplicateElement;
+use Phpsol\Collection\Set\Exception\NonExistentClass;
+use Phpsol\Collection\Set\Exception\UnexpectedType;
 use Traversable;
+use function class_exists;
 use function count;
+use function is_a;
 use function spl_object_hash;
 
 /**
- * @template TKey as string
  * @template TValue of object
- * @template-implements Set<TKey, TValue>
+ *
+ * @template-implements Set<string, TValue>
  */
 final class HashSet implements Set
 {
-    /** @var array<TKey, TValue> */
+    /** @var class-string */
+    private $class;
+
+    /** @var array<string, TValue> */
     private $elements = [];
 
-    /** @var Traversable<TKey, TValue> */
+    /** @var Traversable<string, TValue> */
     private $iterator;
 
     /**
+     * @param class-string<TValue> $class
      * @param array<string|int, TValue> $elements
      *
+     * @throws NonExistentClass
+     * @throws UnexpectedType
      * @throws DuplicateElement
      */
-    public function __construct(array $elements = [], ?Traversable $iterator = null)
+    public function __construct(string $class, array $elements = [], ?Traversable $iterator = null)
     {
-        /** @var Traversable<TKey, TValue> */
+        if (!class_exists($class)) {
+            throw NonExistentClass::create($class);
+        }
+
+        $this->class = $class;
+
+        /** @var Traversable<string, TValue> */
         $this->iterator = $iterator ?? new ArrayIterator();
 
         foreach ($elements as $element) {
@@ -38,8 +54,16 @@ final class HashSet implements Set
         }
     }
 
+    /**
+     * @throws UnexpectedType
+     * @throws DuplicateElement
+     */
     public function add(object $element) : void
     {
+        if (!is_a($element, $this->class)) {
+            throw UnexpectedType::create($element, $this->class);
+        }
+
         if ($this->contains($element)) {
             throw DuplicateElement::create();
         }
@@ -101,11 +125,11 @@ final class HashSet implements Set
     }
 
     /**
-     * @return TKey as string
+     * @return string as string
      */
     private function hash(object $element) : string
     {
-        /** @var TKey as string */
+        /** @var string as string */
         return spl_object_hash($element);
     }
 }
