@@ -9,5 +9,44 @@
     <!-- Import Doctrine coding standard (base) -->
     <rule ref="Doctrine">
         <exclude name="Generic.Formatting.MultipleStatementAlignment"/>
+        <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamName"/>
+        <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>
+        <exclude name="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.InvalidFormat"/>
+    </rule>
+
+    <rule ref="Generic.Formatting.SpaceAfterNot">
+        <properties>
+            <property name="spacing" value="0"/>
+        </properties>
+    </rule>
+
+    <!-- Include @psalm-param and @psalm-return -->
+    <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
+        <properties>
+            <property name="linesCountBeforeFirstContent" value="0"/>
+            <property name="linesCountAfterLastContent" value="0"/>
+            <property name="linesCountBetweenDescriptionAndAnnotations" value="1"/>
+            <property name="linesCountBetweenAnnotationsGroups" value="1"/>
+            <property name="annotationsGroups" type="array">
+                <element value="
+                    @internal,
+                    @deprecated,
+                "/>
+                <element value="
+                @link,
+                @see,
+                @uses,
+                "/>
+                <element value="
+                    @ORM\,
+                    @ODM\,
+                    @PHPCR\,
+                "/>
+                <element value="@template"/>
+                <element value="@param,@psalm-param"/>
+                <element value="@return,@psalm-return"/>
+                <element value="@throws"/>
+            </property>
+        </properties>
     </rule>
 </ruleset>
