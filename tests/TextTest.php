@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Phpsol\Tests\Text;
+namespace Phpsol\Tests;
 
-use Phpsol\Text\Text;
+use Phpsol\Text;
 use PHPUnit\Framework\TestCase;
 use function get_class;
 

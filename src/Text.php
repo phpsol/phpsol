@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phpsol\Text;
+namespace Phpsol;
 
 use function array_map;
 use function explode;
