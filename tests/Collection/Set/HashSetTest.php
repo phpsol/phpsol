@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phpsol\Tests\Collection\Set;
 
-use ArrayIterator;
 use Phpsol\Collection\Set\Exception\DuplicateElement;
 use Phpsol\Collection\Set\Exception\NonExistentClass;
 use Phpsol\Collection\Set\Exception\UnexpectedType;
@@ -20,7 +19,6 @@ final class HashSetTest extends TestCase
         $elementB = new stdClass();
         $set = new HashSet(stdClass::class, [$elementA, $elementB]);
 
-        self::assertInstanceOf(ArrayIterator::class, $set->getIterator());
         self::assertTrue($set->contains($elementA));
         self::assertTrue($set->contains($elementB));
     }
