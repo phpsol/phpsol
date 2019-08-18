@@ -11,7 +11,6 @@ use Phpsol\Collection\Set\Exception\UnexpectedType;
 use Phpsol\Collection\Set\HashSet;
 use PHPUnit\Framework\TestCase;
 use stdClass;
-use Traversable;
 
 final class HashSetTest extends TestCase
 {
@@ -156,14 +155,6 @@ final class HashSetTest extends TestCase
         $array = $set->toArray();
         self::assertSame($elementA, $array[0]);
         self::assertSame($elementB, $array[1]);
-    }
-
-    public function testGetIterator() : void
-    {
-        $iterator = $this->createMock(Traversable::class);
-        $set = new HashSet(stdClass::class, [], $iterator);
-
-        self::assertSame($iterator, $set->getIterator());
     }
 
     public function testCount() : void

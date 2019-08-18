@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Phpsol\Collection\Set;
 
 use ArrayIterator;
+use Iterator;
 use Phpsol\Collection\Set\Exception\DuplicateElement;
 use Phpsol\Collection\Set\Exception\NonExistentClass;
 use Phpsol\Collection\Set\Exception\UnexpectedType;
-use Traversable;
 use function array_values;
 use function class_exists;
 use function count;
@@ -28,9 +28,6 @@ final class HashSet implements Set
     /** @var array<string, TValue> */
     private $elements = [];
 
-    /** @var Traversable<string, TValue> */
-    private $iterator;
-
     /**
      * @param class-string<TValue> $class
      * @param array<string|int, TValue> $elements
@@ -39,16 +36,13 @@ final class HashSet implements Set
      * @throws UnexpectedType
      * @throws DuplicateElement
      */
-    public function __construct(string $class, array $elements = [], ?Traversable $iterator = null)
+    public function __construct(string $class, array $elements = [])
     {
         if (!class_exists($class)) {
             throw NonExistentClass::create($class);
         }
 
         $this->class = $class;
-
-        /** @var Traversable<string, TValue> */
-        $this->iterator = $iterator ?? new ArrayIterator();
 
         foreach ($elements as $element) {
             $this->add($element);
@@ -77,9 +71,9 @@ final class HashSet implements Set
         unset($this->elements[$this->hash($element)]);
     }
 
-    public function getIterator() : Traversable
+    public function getIterator() : Iterator
     {
-        return $this->iterator;
+        return new ArrayIterator($this->elements);
     }
 
     public function count() : int
@@ -103,7 +97,7 @@ final class HashSet implements Set
             return false;
         }
 
-        foreach ($set as $element) {
+        foreach ($set as $index => $element) {
             if (!$this->contains($element)) {
                 return false;
             }
