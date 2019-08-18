@@ -38,7 +38,7 @@
     },
     "scripts": {
         "test": [
-            "vendor/bin/phpunit tests"
+            "vendor/bin/phpunit tests --colors"
         ],
         "compile": [
             "vendor/bin/phpcs --standard=phpcs.xml -s -n src tests",
