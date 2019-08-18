@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Phpsol\Collection\Set;
 
 use ArrayIterator;
-use Iterator;
 use Phpsol\Collection\Set\Exception\DuplicateElement;
 use Phpsol\Collection\Set\Exception\NonExistentClass;
 use Phpsol\Collection\Set\Exception\UnexpectedType;
+use Traversable;
 use function array_values;
 use function class_exists;
 use function count;
@@ -71,7 +71,7 @@ final class HashSet implements Set
         unset($this->elements[$this->hash($element)]);
     }
 
-    public function getIterator() : Iterator
+    public function getIterator() : Traversable
     {
         return new ArrayIterator($this->elements);
     }
