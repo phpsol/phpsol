@@ -16,8 +16,8 @@ use function is_a;
 use function spl_object_hash;
 
 /**
- * @template TValue of object
- * @template-implements Set<string, TValue>
+ * @template E of object
+ * @template-implements Set<E>
  */
 final class HashSet implements Set
 {
@@ -28,14 +28,14 @@ final class HashSet implements Set
     private $class;
 
     /**
-     * @psalm-var array<string, TValue>
+     * @psalm-var array<string, E>
      * @var array<string, object>
      */
     private $elements = [];
 
     /**
-     * @psalm-param class-string<TValue> $class
-     * @psalm-param array<string|int, TValue> $elements
+     * @psalm-param class-string<E> $class
+     * @psalm-param array<array-key, E> $elements
      * @param array<string|int, object> $elements
      *
      * @throws NonExistentClass
@@ -118,7 +118,7 @@ final class HashSet implements Set
     }
 
     /**
-     * @psalm-return array<int, TValue>
+     * @psalm-return array<int, E>
      * @return array<int, object>
      */
     public function toArray() : array

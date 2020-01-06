@@ -1,4 +1,4 @@
-# PHP Standard Object Library (Phpsol)
+# PHP Standard Object Library (phpsol)
 This package aims to provide a strict and sensible library containing commonly used objects.
 
 ## Development
@@ -8,4 +8,4 @@ This package aims to provide a strict and sensible library containing commonly u
 * `composer fix` - Fix coding standard violations where possible.
 
 ### IDE
-PhpDocs with psalm-specific notations might not be recognised by your IDE. See https://psalm.dev/docs/running_psalm/language_server on how to get it working in your IDE.
+Psalm-specific annotations might not be recognised by your IDE. See https://psalm.dev/docs/running_psalm/language_server on how to get it working in your IDE.

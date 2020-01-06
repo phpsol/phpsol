@@ -11,40 +11,39 @@ use Phpsol\Collection\Set\Exception\DuplicateElement;
 /**
  * A collection of unique elements.
  *
- * @template TKey
- * @template TValue as object
- * @template-extends IteratorAggregate<TKey, TValue>
+ * @template E as object
+ * @template-extends IteratorAggregate<array-key, E>
  */
 interface Set extends IteratorAggregate, Countable
 {
     /**
-     * @psalm-param TValue $element
+     * @psalm-param E $element
      *
      * @throws DuplicateElement
      */
     public function add(object $element) : void;
 
     /**
-     * @psalm-param TValue $element
+     * @psalm-param E $element
      */
     public function remove(object $element) : void;
 
     public function clear() : void;
 
     /**
-     * @psalm-param TValue $element
+     * @psalm-param E $element
      */
     public function contains(object $element) : bool;
 
     /**
-     * @psalm-param Set<TKey, TValue> $set
+     * @psalm-param Set<E> $set
      */
     public function equals(self $set) : bool;
 
     public function isEmpty() : bool;
 
     /**
-     * @psalm-return array<int|string, TValue>
+     * @psalm-return array<array-key, E>
      * @return array<int|string, object>
      */
     public function toArray() : array;
