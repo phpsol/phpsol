@@ -11,9 +11,8 @@ use Phpsol\Collection\Set\Exception\DuplicateElement;
 /**
  * A collection of unique elements.
  *
- * @psalm-template TKey
- * @psalm-template TValue as object
- *
+ * @template TKey
+ * @template TValue as object
  * @template-extends IteratorAggregate<TKey, TValue>
  */
 interface Set extends IteratorAggregate, Countable
@@ -46,6 +45,7 @@ interface Set extends IteratorAggregate, Countable
 
     /**
      * @psalm-return array<int|string, TValue>
+     * @return array<int|string, object>
      */
     public function toArray() : array;
 }

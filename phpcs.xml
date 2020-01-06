@@ -4,29 +4,11 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd"
 >
-    <description>The Doctrine coding standard.</description>
+    <description>dbrekelmans/phpsol coding standard.</description>
 
-    <!-- Import Doctrine coding standard (base) -->
-    <rule ref="Doctrine">
-        <exclude name="Generic.Formatting.MultipleStatementAlignment"/>
-        <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamName"/>
-        <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>
-        <exclude name="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.InvalidFormat"/>
-    </rule>
-
-    <rule ref="Generic.Formatting.SpaceAfterNot">
-        <properties>
-            <property name="spacing" value="0"/>
-        </properties>
-    </rule>
-
-    <!-- Include @psalm-param and @psalm-return -->
+    <!-- Include psalm specific annotations -->
     <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
         <properties>
-            <property name="linesCountBeforeFirstContent" value="0"/>
-            <property name="linesCountAfterLastContent" value="0"/>
-            <property name="linesCountBetweenDescriptionAndAnnotations" value="1"/>
-            <property name="linesCountBetweenAnnotationsGroups" value="1"/>
             <property name="annotationsGroups" type="array">
                 <element value="
                     @internal,
@@ -42,9 +24,10 @@
                     @ODM\,
                     @PHPCR\,
                 "/>
-                <element value="@template"/>
-                <element value="@param,@psalm-param"/>
-                <element value="@return,@psalm-return"/>
+                <element value="@template,@psalm-template,@template-extends,@template-implements"/>
+                <element value="@psalm-var,@var"/>
+                <element value="@psalm-param,@param"/>
+                <element value="@psalm-return,@return"/>
                 <element value="@throws"/>
             </property>
         </properties>
