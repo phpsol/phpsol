@@ -1,4 +1,5 @@
 # PHP Standard Object Library (Phpsol)
+This package aims to provide a strict and sensible library containing commonly used objects.
 
 ## Development
 ### Tools

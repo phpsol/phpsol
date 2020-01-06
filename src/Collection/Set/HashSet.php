@@ -22,15 +22,19 @@ use function spl_object_hash;
  */
 final class HashSet implements Set
 {
-    /** @var class-string */
+    /**
+     * @psalm-var class-string
+     */
     private $class;
 
-    /** @var array<string, TValue> */
+    /**
+     * @psalm-var array<string, TValue>
+     */
     private $elements = [];
 
     /**
-     * @param class-string<TValue> $class
-     * @param array<string|int, TValue> $elements
+     * @psalm-param class-string<TValue> $class
+     * @psalm-param array<string|int, TValue> $elements
      *
      * @throws NonExistentClass
      * @throws UnexpectedType
@@ -112,7 +116,7 @@ final class HashSet implements Set
     }
 
     /**
-     * @return array<int, TValue>
+     * @psalm-return array<int, TValue>
      */
     public function toArray() : array
     {
