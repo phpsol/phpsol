@@ -21,8 +21,8 @@ final class TextTest extends TestCase
 
     public function testEquals() : void
     {
-        $sameA = Text::fromString('same');
-        $sameB = Text::fromString('same');
+        $sameA     = Text::fromString('same');
+        $sameB     = Text::fromString('same');
         $different = Text::fromString('different');
 
         self::assertTrue($sameA->equals($sameB));
@@ -91,7 +91,7 @@ final class TextTest extends TestCase
         $text = Text::fromString($value);
 
         self::assertEquals($value, $text);
-        self::assertSame($value, (string)$text);
+        self::assertSame($value, (string) $text);
         self::assertSame($value, $text->toString());
         self::assertSame($value, $text->__toString());
     }

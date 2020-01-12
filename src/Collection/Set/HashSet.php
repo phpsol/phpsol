@@ -5,19 +5,24 @@ declare(strict_types=1);
 namespace Phpsol\Collection\Set;
 
 use ArrayIterator;
+use Phpsol\Collection\Collection;
 use Phpsol\Collection\Set\Exception\DuplicateElement;
-use Phpsol\Collection\Set\Exception\NonExistentClass;
-use Phpsol\Collection\Set\Exception\UnexpectedType;
+use Phpsol\Exception\NonExistentClass;
+use Phpsol\Exception\UnexpectedType;
 use Traversable;
 use function array_values;
 use function class_exists;
 use function count;
 use function is_a;
+use function is_object;
 use function spl_object_hash;
 
 /**
  * @template E of object
+ *
  * @template-implements Set<E>
+ *
+ * @psalm-external-mutation-free
  */
 final class HashSet implements Set
 {
@@ -56,13 +61,19 @@ final class HashSet implements Set
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws UnexpectedType
      * @throws DuplicateElement
      */
-    public function add(object $element) : void
+    public function add($element) : void
     {
+        if (!is_object($element)) {
+            throw UnexpectedType::of($element, $this->class);
+        }
+
         if (!is_a($element, $this->class)) {
-            throw UnexpectedType::create($element, $this->class);
+            throw UnexpectedType::ofObject($element, $this->class);
         }
 
         if ($this->contains($element)) {
@@ -72,14 +83,25 @@ final class HashSet implements Set
         $this->elements[$this->hash($element)] = $element;
     }
 
-    public function remove(object $element) : void
+    /**
+     * @inheritDoc
+     */
+    public function remove($element) : void
     {
+        if (!is_object($element)) {
+            throw UnexpectedType::of($element, $this->class);
+        }
+
+        if (!is_a($element, $this->class)) {
+            throw UnexpectedType::ofObject($element, $this->class);
+        }
+
         unset($this->elements[$this->hash($element)]);
     }
 
     public function getIterator() : Traversable
     {
-        return new ArrayIterator($this->elements);
+        return new ArrayIterator($this->toArray());
     }
 
     public function count() : int
@@ -92,18 +114,29 @@ final class HashSet implements Set
         $this->elements = [];
     }
 
-    public function contains(object $element) : bool
+    /**
+     * @inheritDoc
+     */
+    public function contains($element) : bool
     {
+        if (!is_object($element)) {
+            throw UnexpectedType::of($element, $this->class);
+        }
+
+        if (!is_a($element, $this->class)) {
+            throw UnexpectedType::ofObject($element, $this->class);
+        }
+
         return isset($this->elements[$this->hash($element)]);
     }
 
-    public function equals(Set $set) : bool
+    public function equals(Collection $collection) : bool
     {
-        if ($set->count() !== $this->count()) {
+        if ($collection->count() !== $this->count()) {
             return false;
         }
 
-        foreach ($set as $index => $element) {
+        foreach ($collection as $element) {
             if (!$this->contains($element)) {
                 return false;
             }
@@ -118,8 +151,7 @@ final class HashSet implements Set
     }
 
     /**
-     * @psalm-return array<int, E>
-     * @return array<int, object>
+     * @inheritDoc
      */
     public function toArray() : array
     {

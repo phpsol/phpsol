@@ -6,30 +6,5 @@
 >
     <description>dbrekelmans/phpsol coding standard.</description>
 
-    <!-- Include psalm specific annotations -->
-    <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
-        <properties>
-            <property name="annotationsGroups" type="array">
-                <element value="
-                    @internal,
-                    @deprecated,
-                "/>
-                <element value="
-                @link,
-                @see,
-                @uses,
-                "/>
-                <element value="
-                    @ORM\,
-                    @ODM\,
-                    @PHPCR\,
-                "/>
-                <element value="@template,@psalm-template,@template-extends,@template-implements"/>
-                <element value="@psalm-var,@var"/>
-                <element value="@psalm-param,@param"/>
-                <element value="@psalm-return,@return"/>
-                <element value="@throws"/>
-            </property>
-        </properties>
-    </rule>
+    <rule ref="dbrekelmans"/>
 </ruleset>

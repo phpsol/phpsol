@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Phpsol\Tests\Collection\Set;
+namespace Phpsol\Tests\Collection;
 
 use Phpsol\Collection\Set\Exception\DuplicateElement;
-use Phpsol\Collection\Set\Exception\NonExistentClass;
-use Phpsol\Collection\Set\Exception\UnexpectedType;
 use Phpsol\Collection\Set\HashSet;
+use Phpsol\Exception\NonExistentClass;
+use Phpsol\Exception\UnexpectedType;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 

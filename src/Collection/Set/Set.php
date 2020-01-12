@@ -4,47 +4,31 @@ declare(strict_types=1);
 
 namespace Phpsol\Collection\Set;
 
-use Countable;
-use IteratorAggregate;
+use Phpsol\Collection\MutableCollection;
 use Phpsol\Collection\Set\Exception\DuplicateElement;
 
 /**
- * A collection of unique elements.
+ * A collection of unique objects.
  *
  * @template E as object
- * @template-extends IteratorAggregate<array-key, E>
+ *
+ * @template-extends MutableCollection<E>
+ *
+ * @psalm-external-mutation-free
  */
-interface Set extends IteratorAggregate, Countable
+interface Set extends MutableCollection
 {
     /**
-     * @psalm-param E $element
+     * @inheritDoc
      *
      * @throws DuplicateElement
      */
-    public function add(object $element) : void;
+    public function add($element) : void;
 
     /**
-     * @psalm-param E $element
-     */
-    public function remove(object $element) : void;
-
-    public function clear() : void;
-
-    /**
-     * @psalm-param E $element
-     */
-    public function contains(object $element) : bool;
-
-    /**
-     * @psalm-param Set<E> $set
-     */
-    public function equals(self $set) : bool;
-
-    public function isEmpty() : bool;
-
-    /**
-     * @psalm-return array<array-key, E>
-     * @return array<int|string, object>
+     * @psalm-return array<int, E>
+     *
+     * @return array<int, object>
      */
     public function toArray() : array;
 }

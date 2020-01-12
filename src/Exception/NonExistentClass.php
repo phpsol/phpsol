@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phpsol\Collection\Set\Exception;
+namespace Phpsol\Exception;
 
 use InvalidArgumentException;
 use function sprintf;

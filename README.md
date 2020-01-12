@@ -1,6 +1,18 @@
 # PHP Standard Object Library (phpsol)
 This package aims to provide a strict and sensible library containing commonly used objects.
 
+## Collection
+Can only contain elements of the same type.
+
+### Sequence
+Contains elements indexed by integer.
+
+### Set
+Contains unique elements and is not indexed.
+
+### Map
+Contains elements indexed by indicis of a specified type.
+
 ## Development
 ### Tools
 * `composer test` - Execute all tests.

@@ -1,0 +1,54 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Phpsol\Collection;
+
+use Countable;
+use IteratorAggregate;
+use Traversable;
+
+/**
+ * A collection of elements of the same type.
+ *
+ * @template E
+ *
+ * @template-extends IteratorAggregate<array-key, E>
+ *
+ * @psalm-external-mutation-free
+ */
+interface Collection extends Countable, IteratorAggregate
+{
+    /**
+     * @psalm-param E $element
+     * @param mixed $element
+     *
+     * @psalm-pure
+     */
+    public function contains($element) : bool;
+
+    /**
+     * @psalm-param Collection<E> $collection
+     *
+     * @psalm-pure
+     */
+    public function equals(Collection $collection) : bool;
+
+    /** @psalm-pure */
+    public function isEmpty() : bool;
+
+    /** @psalm-pure */
+    public function getIterator() : Traversable;
+
+    /** @psalm-pure */
+    public function count() : int;
+
+    /**
+     * @psalm-return array<array-key, E>
+     *
+     * @return array<int|string, mixed>
+     *
+     * @psalm-pure
+     */
+    public function toArray() : array;
+}
