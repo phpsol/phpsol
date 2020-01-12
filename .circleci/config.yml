@@ -3,7 +3,7 @@ version: 2.1
 executors:
     php:
         docker:
-            -   image: circleci/php:7.2
+            -   image: circleci/php:7.3
         working_directory: ~/phpsol
 
 jobs:
