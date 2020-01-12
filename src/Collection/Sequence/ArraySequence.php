@@ -6,7 +6,7 @@ namespace Phpsol\Collection\Sequence;
 
 use ArrayIterator;
 use Phpsol\Collection\Collection;
-use Phpsol\Collection\Sequence\Exception\ElementNotFound;
+use Phpsol\Collection\Exception\ElementNotFound;
 use Phpsol\Collection\Sequence\Exception\IndexOutOfBounds;
 use Traversable;
 use function array_splice;
@@ -112,7 +112,10 @@ class ArraySequence implements Sequence
     }
 
     /**
-     * @inheritDoc
+     * @psalm-param E $element
+     * @param mixed $element
+     *
+     * @psalm-pure
      */
     public function contains($element) : bool
     {
@@ -126,7 +129,9 @@ class ArraySequence implements Sequence
     }
 
     /**
-     * @inheritDoc
+     * @psalm-param Collection<E> $collection
+     *
+     * @psalm-pure
      */
     public function equals(Collection $collection) : bool
     {
@@ -134,7 +139,7 @@ class ArraySequence implements Sequence
             return false;
         }
 
-        foreach ($collection as $index => $element) {
+        foreach ($collection->getIterator() as $index => $element) {
             if (!is_int($index)) {
                 return false;
             }
@@ -156,6 +161,11 @@ class ArraySequence implements Sequence
         return $this->count() === 0;
     }
 
+    /**
+     * @psalm-return Traversable<int, E>
+     *
+     * @psalm-pure
+     */
     public function getIterator() : Traversable
     {
         return new ArrayIterator($this->toArray());
@@ -172,7 +182,11 @@ class ArraySequence implements Sequence
     }
 
     /**
-     * @inheritDoc
+     * @psalm-return array<int, E>
+     *
+     * @return array<int, mixed>
+     *
+     * @psalm-pure
      */
     public function toArray() : array
     {

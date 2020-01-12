@@ -19,7 +19,8 @@ use Phpsol\Collection\Set\Exception\DuplicateElement;
 interface Set extends MutableCollection
 {
     /**
-     * @inheritDoc
+     * @psalm-param E $element
+     * @param mixed $element
      *
      * @throws DuplicateElement
      */

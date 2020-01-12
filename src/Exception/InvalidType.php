@@ -6,6 +6,9 @@ namespace Phpsol\Exception;
 
 use LogicException;
 
+/**
+ * @psalm-external-mutation-free
+ */
 class InvalidType extends LogicException
 {
 }

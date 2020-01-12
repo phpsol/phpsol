@@ -6,15 +6,11 @@ namespace Phpsol\Collection\Set;
 
 use ArrayIterator;
 use Phpsol\Collection\Collection;
+use Phpsol\Collection\Exception\ElementNotFound;
 use Phpsol\Collection\Set\Exception\DuplicateElement;
-use Phpsol\Exception\NonExistentClass;
-use Phpsol\Exception\UnexpectedType;
 use Traversable;
 use function array_values;
-use function class_exists;
 use function count;
-use function is_a;
-use function is_object;
 use function spl_object_hash;
 
 /**
@@ -27,12 +23,6 @@ use function spl_object_hash;
 final class HashSet implements Set
 {
     /**
-     * @psalm-var class-string
-     * @var string
-     */
-    private $class;
-
-    /**
      * @psalm-var array<string, E>
      * @var array<string, object>
      */
@@ -43,39 +33,23 @@ final class HashSet implements Set
      * @psalm-param array<array-key, E> $elements
      * @param array<string|int, object> $elements
      *
-     * @throws NonExistentClass
-     * @throws UnexpectedType
      * @throws DuplicateElement
      */
-    public function __construct(string $class, array $elements = [])
+    public function __construct(array $elements = [])
     {
-        if (!class_exists($class)) {
-            throw NonExistentClass::create($class);
-        }
-
-        $this->class = $class;
-
         foreach ($elements as $element) {
             $this->add($element);
         }
     }
 
     /**
-     * @inheritDoc
+     * @psalm-param E $element
+     * @param mixed $element
      *
-     * @throws UnexpectedType
      * @throws DuplicateElement
      */
     public function add($element) : void
     {
-        if (!is_object($element)) {
-            throw UnexpectedType::of($element, $this->class);
-        }
-
-        if (!is_a($element, $this->class)) {
-            throw UnexpectedType::ofObject($element, $this->class);
-        }
-
         if ($this->contains($element)) {
             throw DuplicateElement::create();
         }
@@ -88,17 +62,18 @@ final class HashSet implements Set
      */
     public function remove($element) : void
     {
-        if (!is_object($element)) {
-            throw UnexpectedType::of($element, $this->class);
-        }
-
-        if (!is_a($element, $this->class)) {
-            throw UnexpectedType::ofObject($element, $this->class);
+        if (!$this->contains($element)) {
+            throw ElementNotFound::create();
         }
 
         unset($this->elements[$this->hash($element)]);
     }
 
+    /**
+     * @psalm-return Traversable<array-key, E>
+     *
+     * @psalm-pure
+     */
     public function getIterator() : Traversable
     {
         return new ArrayIterator($this->toArray());
@@ -115,21 +90,21 @@ final class HashSet implements Set
     }
 
     /**
-     * @inheritDoc
+     * @psalm-param E $element
+     * @param mixed $element
+     *
+     * @psalm-pure
      */
     public function contains($element) : bool
     {
-        if (!is_object($element)) {
-            throw UnexpectedType::of($element, $this->class);
-        }
-
-        if (!is_a($element, $this->class)) {
-            throw UnexpectedType::ofObject($element, $this->class);
-        }
-
         return isset($this->elements[$this->hash($element)]);
     }
 
+    /**
+     * @psalm-param Collection<E> $collection
+     *
+     * @psalm-pure
+     */
     public function equals(Collection $collection) : bool
     {
         if ($collection->count() !== $this->count()) {
@@ -151,7 +126,9 @@ final class HashSet implements Set
     }
 
     /**
-     * @inheritDoc
+     * @psalm-return array<int, E>
+     *
+     * @return array<int, object>
      */
     public function toArray() : array
     {

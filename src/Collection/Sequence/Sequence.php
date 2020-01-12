@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Phpsol\Collection\Sequence;
 
+use Phpsol\Collection\Exception\ElementNotFound;
 use Phpsol\Collection\MutableCollection;
-use Phpsol\Collection\Sequence\Exception\ElementNotFound;
 use Phpsol\Collection\Sequence\Exception\IndexOutOfBounds;
 
 /**

@@ -11,9 +11,16 @@ use function gettype;
 use function interface_exists;
 use function sprintf;
 
+/**
+ * @psalm-external-mutation-free
+ */
 final class UnexpectedType extends UnexpectedValueException
 {
-    /** @param mixed $value */
+    /**
+     * @param mixed $value
+     *
+     * @psalm-pure
+     */
     public static function of($value, string $expected) : self
     {
         $type = gettype($value);
@@ -26,7 +33,11 @@ final class UnexpectedType extends UnexpectedValueException
         return new self(sprintf('Type "%s" expected. Given "%s".', $expected, $type));
     }
 
-    /** @psalm-param class-string $expected */
+    /**
+     * @psalm-param class-string $expected
+     *
+     * @psalm-pure
+     */
     public static function ofObject(object $object, string $expected) : self
     {
         return new self(sprintf('Object of class "%s" expected. Given: "%s".', $expected, get_class($object)));

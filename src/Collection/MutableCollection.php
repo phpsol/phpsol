@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Phpsol\Collection;
 
+use Phpsol\Collection\Exception\ElementNotFound;
+
 /**
  * @template E
  *
@@ -24,6 +26,8 @@ interface MutableCollection extends Collection
     /**
      * @psalm-param E $element
      * @param mixed $element
+     *
+     * @throws ElementNotFound If the element is not found in the sequence.
      */
     public function remove($element) : void;
 }

@@ -37,7 +37,11 @@ interface Collection extends Countable, IteratorAggregate
     /** @psalm-pure */
     public function isEmpty() : bool;
 
-    /** @psalm-pure */
+    /**
+     * @psalm-return Traversable<array-key, E>
+     *
+     * @psalm-pure
+     */
     public function getIterator() : Traversable;
 
     /** @psalm-pure */
