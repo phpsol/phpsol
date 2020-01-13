@@ -9,7 +9,7 @@ use UnexpectedValueException;
 /**
  * @psalm-external-mutation-free
  */
-class ElementNotFound extends UnexpectedValueException
+final class ElementNotFound extends UnexpectedValueException
 {
     /**
      * @psalm-pure

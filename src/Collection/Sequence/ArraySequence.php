@@ -21,7 +21,7 @@ use function is_int;
  *
  * @psalm-external-mutation-free
  */
-class ArraySequence implements Sequence
+final class ArraySequence implements Sequence
 {
     /**
      * @psalm-var array<int, E>

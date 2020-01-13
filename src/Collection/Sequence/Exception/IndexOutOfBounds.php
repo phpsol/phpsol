@@ -10,7 +10,7 @@ use function sprintf;
 /**
  * @psalm-external-mutation-free
  */
-class IndexOutOfBounds extends UnexpectedValueException
+final class IndexOutOfBounds extends UnexpectedValueException
 {
     /**
      * @psalm-pure
