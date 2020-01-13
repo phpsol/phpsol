@@ -183,7 +183,6 @@ final class ArraySequence implements Sequence
 
     /**
      * @psalm-return array<int, E>
-     *
      * @return array<int, mixed>
      *
      * @psalm-pure

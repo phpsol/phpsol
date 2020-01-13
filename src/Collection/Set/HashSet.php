@@ -127,7 +127,6 @@ final class HashSet implements Set
 
     /**
      * @psalm-return array<int, E>
-     *
      * @return array<int, object>
      */
     public function toArray() : array

@@ -37,7 +37,6 @@ interface Set extends Collection
 
     /**
      * @psalm-return array<int, E>
-     *
      * @return array<int, object>
      */
     public function toArray() : array;

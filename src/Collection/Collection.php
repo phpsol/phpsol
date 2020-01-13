@@ -49,7 +49,6 @@ interface Collection extends Countable, IteratorAggregate
 
     /**
      * @psalm-return array<array-key, E>
-     *
      * @return array<int|string, mixed>
      *
      * @psalm-pure

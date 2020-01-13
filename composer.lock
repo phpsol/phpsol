@@ -189,16 +189,16 @@
         },
         {
             "name": "dbrekelmans/coding-standard",
-            "version": "1.1",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dbrekelmans/coding-standard.git",
-                "reference": "86eabdf0274ac2135b7c51b09cdc3c0972fbd986"
+                "reference": "b4a3750ecf00a1c9099cb0c00d8b4582e08ca0d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dbrekelmans/coding-standard/zipball/86eabdf0274ac2135b7c51b09cdc3c0972fbd986",
-                "reference": "86eabdf0274ac2135b7c51b09cdc3c0972fbd986",
+                "url": "https://api.github.com/repos/dbrekelmans/coding-standard/zipball/b4a3750ecf00a1c9099cb0c00d8b4582e08ca0d9",
+                "reference": "b4a3750ecf00a1c9099cb0c00d8b4582e08ca0d9",
                 "shasum": ""
             },
             "require": {
@@ -219,7 +219,7 @@
                 }
             ],
             "description": "Coding standard heavily based on Doctrine coding standard.",
-            "time": "2020-01-11T21:44:07+00:00"
+            "time": "2020-01-13T22:12:27+00:00"
         },
         {
             "name": "dealerdirect/phpcodesniffer-composer-installer",

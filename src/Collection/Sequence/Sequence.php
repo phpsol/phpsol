@@ -40,10 +40,9 @@ interface Sequence extends Collection
 
     /**
      * @psalm-return E
+     * @return mixed
      *
      * @throws IndexOutOfBounds If the index is less than 0 or greater than the size of the sequence.
-     *
-     * @return mixed
      *
      * @psalm-pure
      */
@@ -76,7 +75,6 @@ interface Sequence extends Collection
 
     /**
      * @psalm-return array<int, E>
-     *
      * @return array<int, mixed>
      *
      * @psalm-pure
