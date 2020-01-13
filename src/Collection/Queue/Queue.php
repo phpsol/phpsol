@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phpsol\Collection\Queue;
 
 use Phpsol\Collection\Collection;
+use Phpsol\Collection\Stack\Exception\EmptyStack;
 
 /**
  * A first in, first out collection.
@@ -21,8 +22,9 @@ interface Queue extends Collection
      * Removes and returns the element at the front of the queue.
      *
      * @psalm-return E
-     *
      * @return mixed
+     *
+     * @throws EmptyStack when the stack contains no elements.
      */
     public function next();
 

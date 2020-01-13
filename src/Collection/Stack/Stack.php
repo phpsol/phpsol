@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phpsol\Collection\Stack;
 
 use Phpsol\Collection\Collection;
+use Phpsol\Collection\Stack\Exception\EmptyStack;
 
 /**
  * A first in, last out collection.
@@ -21,8 +22,9 @@ interface Stack extends Collection
      * Returns the element at the top of the stack without removing it.
      *
      * @psalm-return E
-     *
      * @return mixed
+     *
+     * @throws EmptyStack when the stack contains no elements.
      */
     public function peek();
 
@@ -30,8 +32,9 @@ interface Stack extends Collection
      * Removes and returns the element at the top of the stack.
      *
      * @psalm-return E
-     *
      * @return mixed
+     *
+     * @throws EmptyStack when the stack contains no elements.
      */
     public function pop();
 
