@@ -1,0 +1,45 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Phpsol\Collection\Stack;
+
+use Phpsol\Collection\Collection;
+
+/**
+ * A first in, last out collection.
+ *
+ * @template E
+ *
+ * @template-extends Collection<E>
+ *
+ * @psalm-external-mutation-free
+ */
+interface Stack extends Collection
+{
+    /**
+     * Returns the element at the top of the stack without removing it.
+     *
+     * @psalm-return E
+     *
+     * @return mixed
+     */
+    public function peek();
+
+    /**
+     * Removes and returns the element at the top of the stack.
+     *
+     * @psalm-return E
+     *
+     * @return mixed
+     */
+    public function pop();
+
+    /**
+     * Pushes an element on top of the stack.
+     *
+     * @psalm-param E $element
+     * @param mixed $element
+     */
+    public function push($element) : void;
+}
