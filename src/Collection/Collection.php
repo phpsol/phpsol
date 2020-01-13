@@ -11,7 +11,7 @@ use Traversable;
 /**
  * A collection of elements of the same type.
  *
- * @template E
+ * @template E as object
  *
  * @template-extends IteratorAggregate<array-key, E>
  *

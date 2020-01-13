@@ -14,7 +14,7 @@ use function count;
 use function spl_object_hash;
 
 /**
- * @template E of object
+ * @template E as object
  *
  * @template-implements Set<E>
  *

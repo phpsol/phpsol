@@ -11,7 +11,7 @@ use Phpsol\Collection\Sequence\Exception\IndexOutOfBounds;
 /**
  * An ordered sequence of elements of the same type.
  *
- * @template E
+ * @template E as object
  *
  * @template-extends MutableCollection<E>
  *

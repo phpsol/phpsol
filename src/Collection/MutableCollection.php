@@ -7,7 +7,7 @@ namespace Phpsol\Collection;
 use Phpsol\Collection\Exception\ElementNotFound;
 
 /**
- * @template E
+ * @template E as object
  *
  * @template-extends Collection<E>
  *
