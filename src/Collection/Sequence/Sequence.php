@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace Phpsol\Collection\Sequence;
 
+use Phpsol\Collection\Collection;
 use Phpsol\Collection\Exception\ElementNotFound;
-use Phpsol\Collection\MutableCollection;
 use Phpsol\Collection\Sequence\Exception\IndexOutOfBounds;
 
 /**
- * An ordered sequence of elements of the same type.
+ * An ordered collection.
  *
- * @template E as object
+ * @template E
  *
- * @template-extends MutableCollection<E>
+ * @template-extends Collection<E>
  *
  * @psalm-external-mutation-free
  */
-interface Sequence extends MutableCollection
+interface Sequence extends Collection
 {
     /**
      * Adds the element at the end of the sequence.

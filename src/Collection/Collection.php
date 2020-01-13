@@ -11,7 +11,7 @@ use Traversable;
 /**
  * A collection of elements of the same type.
  *
- * @template E as object
+ * @template E
  *
  * @template-extends IteratorAggregate<array-key, E>
  *
@@ -55,4 +55,6 @@ interface Collection extends Countable, IteratorAggregate
      * @psalm-pure
      */
     public function toArray() : array;
+
+    public function clear() : void;
 }

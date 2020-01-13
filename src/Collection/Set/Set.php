@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace Phpsol\Collection\Set;
 
-use Phpsol\Collection\MutableCollection;
+use Phpsol\Collection\Collection;
+use Phpsol\Collection\Exception\ElementNotFound;
 use Phpsol\Collection\Set\Exception\DuplicateElement;
 
 /**
- * A collection of unique objects.
+ * A collection of unique elements.
  *
- * @template E as object
+ * @template E
  *
- * @template-extends MutableCollection<E>
+ * @template-extends Collection<E>
  *
  * @psalm-external-mutation-free
  */
-interface Set extends MutableCollection
+interface Set extends Collection
 {
     /**
      * @psalm-param E $element
@@ -25,6 +26,14 @@ interface Set extends MutableCollection
      * @throws DuplicateElement
      */
     public function add($element) : void;
+
+    /**
+     * @psalm-param E $element
+     * @param mixed $element
+     *
+     * @throws ElementNotFound If the element is not found in the sequence.
+     */
+    public function remove($element) : void;
 
     /**
      * @psalm-return array<int, E>

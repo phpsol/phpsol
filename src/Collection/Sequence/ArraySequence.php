@@ -15,7 +15,7 @@ use function count;
 use function is_int;
 
 /**
- * @template E as object
+ * @template E
  *
  * @template-implements Sequence<E>
  *
