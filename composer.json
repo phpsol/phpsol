@@ -39,13 +39,25 @@
         "test": [
             "vendor/bin/phpunit tests --colors"
         ],
-        "compile": [
-            "vendor/bin/phpcs --standard=phpcs.xml -s -n src tests",
+        "lint": [
+            "vendor/bin/phpcs --standard=phpcs.xml -s -n src tests"
+        ],
+        "lint-fix": [
+            "vendor/bin/phpcbf --standard=phpcs.xml src tests"
+        ],
+        "analyse": [
             "vendor/bin/psalm"
         ],
-        "fix": [
-            "vendor/bin/phpcbf --standard=phpcs.xml src tests",
+        "analyse-fix": [
             "vendor/bin/psalm --alter"
+        ],
+        "compile": [
+            "@lint",
+            "@analyse"
+        ],
+        "fix": [
+            "@lint-fix",
+            "@analyse-fix"
         ]
     }
 }
