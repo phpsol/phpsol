@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Phpsol\Collection\Sequence;
+namespace Phpsol\Collection;
 
-use Phpsol\Collection\Collection;
 use Phpsol\Collection\Exception\ElementNotFound;
-use Phpsol\Collection\Sequence\Exception\IndexOutOfBounds;
+use Phpsol\Collection\Exception\IndexOutOfBounds;
 
 /**
  * An ordered collection.
  *
- * @template E
+ * @template E as object
  *
  * @template-extends Collection<E>
  *
@@ -23,40 +22,36 @@ interface Sequence extends Collection
      * Adds the element at the end of the sequence.
      *
      * @psalm-param E $element
-     * @param mixed $element
      */
-    public function add($element) : void;
+    public function add(object $element) : void;
 
     /**
      * Adds element at the specified index. Shifts the element currently at that position (if any) and any
      * subsequent elements to the right (adds one to their indices).
      *
      * @psalm-param E $element
-     * @param mixed $element
      *
      * @throws IndexOutOfBounds If the index is less than 0 or greater than the size of the sequence.
      */
-    public function addAt(int $index, $element) : void;
+    public function addAt(int $index, object $element) : void;
 
     /**
      * @psalm-return E
-     * @return mixed
      *
      * @throws IndexOutOfBounds If the index is less than 0 or greater than the size of the sequence.
      *
      * @psalm-pure
      */
-    public function get(int $index);
+    public function get(int $index) : object;
 
     /**
      * Removes the first occurance of the element from the sequence.
      *
      * @psalm-param E $element
-     * @param mixed $element
      *
      * @throws ElementNotFound If the element is not found in the sequence.
      */
-    public function remove($element) : void;
+    public function remove(object $element) : void;
 
     /**
      * @throws IndexOutOfBounds If the index is less than 0 or greater than or equal to the size of the sequence.
@@ -65,17 +60,16 @@ interface Sequence extends Collection
 
     /**
      * @psalm-param E $element
-     * @param mixed $element
      *
      * @throws ElementNotFound If the element is not found in the sequence.
      *
      * @psalm-pure
      */
-    public function indexOf($element) : int;
+    public function indexOf(object $element) : int;
 
     /**
      * @psalm-return array<int, E>
-     * @return array<int, mixed>
+     * @return array<int, object>
      *
      * @psalm-pure
      */

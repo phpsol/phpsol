@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Phpsol\Collection\Sequence;
+namespace Phpsol\Collection;
 
 use ArrayIterator;
-use Phpsol\Collection\Collection;
 use Phpsol\Collection\Exception\ElementNotFound;
-use Phpsol\Collection\Sequence\Exception\IndexOutOfBounds;
+use Phpsol\Collection\Exception\IndexOutOfBounds;
 use Traversable;
 use function array_splice;
 use function array_values;
@@ -15,7 +14,7 @@ use function count;
 use function is_int;
 
 /**
- * @template E
+ * @template E as object
  *
  * @template-implements Sequence<E>
  *
@@ -25,13 +24,13 @@ final class ArraySequence implements Sequence
 {
     /**
      * @psalm-var array<int, E>
-     * @var array<int, mixed>
+     * @var array<int, object>
      */
     private $elements;
 
     /**
      * @psalm-param array<array-key, E> $elements
-     * @param array<int|string, mixed> $elements
+     * @param array<int|string, object> $elements
      */
     public function __construct(array $elements = [])
     {
@@ -41,7 +40,7 @@ final class ArraySequence implements Sequence
     /**
      * @inheritDoc
      */
-    public function add($element) : void
+    public function add(object $element) : void
     {
         $this->elements[] = $element;
     }
@@ -49,7 +48,7 @@ final class ArraySequence implements Sequence
     /**
      * @inheritDoc
      */
-    public function addAt(int $index, $element) : void
+    public function addAt(int $index, object $element) : void
     {
         $size = $this->count();
         if ($index < 0 || $index > $size) {
@@ -62,7 +61,7 @@ final class ArraySequence implements Sequence
     /**
      * @inheritDoc
      */
-    public function get(int $index)
+    public function get(int $index) : object
     {
         $size = $this->count();
         if ($index < 0 || $index >= $size) {
@@ -75,7 +74,7 @@ final class ArraySequence implements Sequence
     /**
      * @inheritDoc
      */
-    public function remove($element) : void
+    public function remove(object $element) : void
     {
         if (!$this->contains($element)) {
             throw ElementNotFound::create();
@@ -100,7 +99,7 @@ final class ArraySequence implements Sequence
     /**
      * @inheritDoc
      */
-    public function indexOf($element) : int
+    public function indexOf(object $element) : int
     {
         foreach ($this->elements as $index => $_element) {
             if ($_element === $element) {
@@ -113,11 +112,10 @@ final class ArraySequence implements Sequence
 
     /**
      * @psalm-param E $element
-     * @param mixed $element
      *
      * @psalm-pure
      */
-    public function contains($element) : bool
+    public function contains(object $element) : bool
     {
         foreach ($this->elements as $_element) {
             if ($_element === $element) {
@@ -147,7 +145,6 @@ final class ArraySequence implements Sequence
             if (!isset($this->elements[$index])) {
                 return false;
             }
-
             if ($this->get($index) !== $element) {
                 return false;
             }
@@ -183,7 +180,7 @@ final class ArraySequence implements Sequence
 
     /**
      * @psalm-return array<int, E>
-     * @return array<int, mixed>
+     * @return array<int, object>
      *
      * @psalm-pure
      */

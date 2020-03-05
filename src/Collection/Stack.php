@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Phpsol\Collection\Stack;
+namespace Phpsol\Collection;
 
-use Phpsol\Collection\Collection;
 use Phpsol\Collection\Stack\Exception\EmptyStack;
 
 /**
  * A first in, last out collection.
  *
- * @template E
+ * @template E as object
  *
  * @template-extends Collection<E>
  *
@@ -22,27 +21,24 @@ interface Stack extends Collection
      * Returns the element at the top of the stack without removing it.
      *
      * @psalm-return E
-     * @return mixed
      *
      * @throws EmptyStack when the stack contains no elements.
      */
-    public function peek();
+    public function peek() : object;
 
     /**
      * Removes and returns the element at the top of the stack.
      *
      * @psalm-return E
-     * @return mixed
      *
      * @throws EmptyStack when the stack contains no elements.
      */
-    public function pop();
+    public function pop() : object;
 
     /**
      * Pushes an element on top of the stack.
      *
      * @psalm-param E $element
-     * @param mixed $element
      */
-    public function push($element) : void;
+    public function push(object $element) : void;
 }

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Phpsol\Tests\Collection\Set;
+namespace Phpsol\Tests\Collection;
 
-use Phpsol\Collection\Set\Exception\DuplicateElement;
-use Phpsol\Collection\Set\HashSet;
+use Phpsol\Collection\Exception\DuplicateElement;
+use Phpsol\Collection\HashSet;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 

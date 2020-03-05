@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phpsol\Collection\Set\Exception;
+namespace Phpsol\Collection\Exception;
 
 use InvalidArgumentException;
 

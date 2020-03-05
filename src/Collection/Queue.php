@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Phpsol\Collection\Queue;
+namespace Phpsol\Collection;
 
-use Phpsol\Collection\Collection;
 use Phpsol\Collection\Stack\Exception\EmptyStack;
 
 /**
  * A first in, first out collection.
  *
- * @template E
+ * @template E as object
  *
  * @template-extends Collection<E>
  *

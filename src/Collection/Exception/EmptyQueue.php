@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phpsol\Collection\Queue\Exception;
+namespace Phpsol\Collection\Exception;
 
 use UnexpectedValueException;
 

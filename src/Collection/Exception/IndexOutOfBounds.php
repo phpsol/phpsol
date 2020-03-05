@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phpsol\Collection\Sequence\Exception;
+namespace Phpsol\Collection\Exception;
 
 use UnexpectedValueException;
 use function sprintf;

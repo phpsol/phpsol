@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Phpsol\Collection\Set;
+namespace Phpsol\Collection;
 
-use Phpsol\Collection\Collection;
+use Phpsol\Collection\Exception\DuplicateElement;
 use Phpsol\Collection\Exception\ElementNotFound;
-use Phpsol\Collection\Set\Exception\DuplicateElement;
 
 /**
  * A collection of unique elements.
  *
- * @template E
+ * @template E as object
  *
  * @template-extends Collection<E>
  *
@@ -21,19 +20,17 @@ interface Set extends Collection
 {
     /**
      * @psalm-param E $element
-     * @param mixed $element
      *
      * @throws DuplicateElement
      */
-    public function add($element) : void;
+    public function add(object $element) : void;
 
     /**
      * @psalm-param E $element
-     * @param mixed $element
      *
      * @throws ElementNotFound If the element is not found in the sequence.
      */
-    public function remove($element) : void;
+    public function remove(object $element) : void;
 
     /**
      * @psalm-return array<int, E>

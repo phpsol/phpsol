@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Phpsol\Collection\Set;
+namespace Phpsol\Collection;
 
 use ArrayIterator;
-use Phpsol\Collection\Collection;
+use Phpsol\Collection\Exception\DuplicateElement;
 use Phpsol\Collection\Exception\ElementNotFound;
-use Phpsol\Collection\Set\Exception\DuplicateElement;
 use Traversable;
 use function array_values;
 use function count;
@@ -44,11 +43,10 @@ final class HashSet implements Set
 
     /**
      * @psalm-param E $element
-     * @param mixed $element
      *
      * @throws DuplicateElement
      */
-    public function add($element) : void
+    public function add(object $element) : void
     {
         if ($this->contains($element)) {
             throw DuplicateElement::create();
@@ -60,7 +58,7 @@ final class HashSet implements Set
     /**
      * @inheritDoc
      */
-    public function remove($element) : void
+    public function remove(object $element) : void
     {
         if (!$this->contains($element)) {
             throw ElementNotFound::create();
@@ -91,11 +89,10 @@ final class HashSet implements Set
 
     /**
      * @psalm-param E $element
-     * @param mixed $element
      *
      * @psalm-pure
      */
-    public function contains($element) : bool
+    public function contains(object $element) : bool
     {
         return isset($this->elements[$this->hash($element)]);
     }
