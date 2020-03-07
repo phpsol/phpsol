@@ -33,7 +33,7 @@ interface Set extends Collection
     public function remove(object $element) : void;
 
     /**
-     * @psalm-return array<int, E>
+     * @psalm-return list<E>
      * @return array<int, object>
      */
     public function toArray() : array;

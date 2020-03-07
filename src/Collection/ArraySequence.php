@@ -23,7 +23,7 @@ use function is_int;
 final class ArraySequence implements Sequence
 {
     /**
-     * @psalm-var array<int, E>
+     * @psalm-var list<E>
      * @var array<int, object>
      */
     private $elements;
@@ -179,7 +179,7 @@ final class ArraySequence implements Sequence
     }
 
     /**
-     * @psalm-return array<int, E>
+     * @psalm-return list<E>
      * @return array<int, object>
      *
      * @psalm-pure
