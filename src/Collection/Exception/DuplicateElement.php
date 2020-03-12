@@ -13,6 +13,6 @@ final class DuplicateElement extends InvalidArgumentException
 {
     public static function create() : self
     {
-        return new self('Element already exists in the set.');
+        return new self('Element already exists.');
     }
 }

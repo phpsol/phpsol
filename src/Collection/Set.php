@@ -10,7 +10,7 @@ use Phpsol\Collection\Exception\ElementNotFound;
 /**
  * A collection of unique elements.
  *
- * @template E as object
+ * @template E
  *
  * @template-extends Collection<E>
  *
@@ -20,21 +20,23 @@ interface Set extends Collection
 {
     /**
      * @psalm-param E $element
+     * @param mixed $element
      *
      * @throws DuplicateElement
      */
-    public function add(object $element) : void;
+    public function add($element) : void;
 
     /**
      * @psalm-param E $element
+     * @param mixed $element
      *
      * @throws ElementNotFound If the element is not found in the sequence.
      */
-    public function remove(object $element) : void;
+    public function remove($element) : void;
 
     /**
      * @psalm-return list<E>
-     * @return array<int, object>
+     * @return array<int, mixed>
      */
     public function toArray() : array;
 }

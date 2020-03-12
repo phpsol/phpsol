@@ -9,7 +9,7 @@ use Phpsol\Collection\Stack\Exception\EmptyStack;
 /**
  * A first in, first out collection.
  *
- * @template E as object
+ * @template E
  *
  * @template-extends Collection<E>
  *

@@ -14,7 +14,7 @@ use function count;
 use function is_int;
 
 /**
- * @template E as object
+ * @template E
  *
  * @template-implements Sequence<E>
  *
@@ -24,13 +24,13 @@ final class ArraySequence implements Sequence
 {
     /**
      * @psalm-var list<E>
-     * @var array<int, object>
+     * @var array<int, mixed>
      */
     private $elements;
 
     /**
      * @psalm-param array<array-key, E> $elements
-     * @param array<int|string, object> $elements
+     * @param array<int|string, mixed> $elements
      */
     public function __construct(array $elements = [])
     {
@@ -40,7 +40,7 @@ final class ArraySequence implements Sequence
     /**
      * @inheritDoc
      */
-    public function add(object $element) : void
+    public function add($element) : void
     {
         $this->elements[] = $element;
     }
@@ -48,7 +48,7 @@ final class ArraySequence implements Sequence
     /**
      * @inheritDoc
      */
-    public function addAt(int $index, object $element) : void
+    public function addAt(int $index, $element) : void
     {
         $size = $this->count();
         if ($index < 0 || $index > $size) {
@@ -61,7 +61,7 @@ final class ArraySequence implements Sequence
     /**
      * @inheritDoc
      */
-    public function get(int $index) : object
+    public function get(int $index)
     {
         $size = $this->count();
         if ($index < 0 || $index >= $size) {
@@ -74,7 +74,7 @@ final class ArraySequence implements Sequence
     /**
      * @inheritDoc
      */
-    public function remove(object $element) : void
+    public function remove($element) : void
     {
         if (!$this->contains($element)) {
             throw ElementNotFound::create();
@@ -99,7 +99,7 @@ final class ArraySequence implements Sequence
     /**
      * @inheritDoc
      */
-    public function indexOf(object $element) : int
+    public function indexOf($element) : int
     {
         foreach ($this->elements as $index => $_element) {
             if ($_element === $element) {
@@ -111,11 +111,11 @@ final class ArraySequence implements Sequence
     }
 
     /**
-     * @psalm-param E $element
+     * @inheritDoc
      *
-     * @psalm-pure
+     * @psalm-param E $element
      */
-    public function contains(object $element) : bool
+    public function contains($element) : bool
     {
         foreach ($this->elements as $_element) {
             if ($_element === $element) {
@@ -127,9 +127,7 @@ final class ArraySequence implements Sequence
     }
 
     /**
-     * @psalm-param Collection<E> $collection
-     *
-     * @psalm-pure
+     * @inheritDoc
      */
     public function equals(Collection $collection) : bool
     {
@@ -159,7 +157,7 @@ final class ArraySequence implements Sequence
     }
 
     /**
-     * @psalm-return Traversable<int, E>
+     * @inheritDoc
      */
     public function getIterator() : Traversable
     {
@@ -177,10 +175,7 @@ final class ArraySequence implements Sequence
     }
 
     /**
-     * @psalm-return list<E>
-     * @return array<int, object>
-     *
-     * @psalm-pure
+     * @inheritDoc
      */
     public function toArray() : array
     {

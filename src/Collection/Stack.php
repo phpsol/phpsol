@@ -9,7 +9,7 @@ use Phpsol\Collection\Stack\Exception\EmptyStack;
 /**
  * A first in, last out collection.
  *
- * @template E as object
+ * @template E
  *
  * @template-extends Collection<E>
  *
@@ -21,24 +21,27 @@ interface Stack extends Collection
      * Returns the element at the top of the stack without removing it.
      *
      * @psalm-return E
+     * @return mixed
      *
      * @throws EmptyStack when the stack contains no elements.
      */
-    public function peek() : object;
+    public function peek();
 
     /**
      * Removes and returns the element at the top of the stack.
      *
      * @psalm-return E
+     * @return mixed
      *
      * @throws EmptyStack when the stack contains no elements.
      */
-    public function pop() : object;
+    public function pop();
 
     /**
      * Pushes an element on top of the stack.
      *
      * @psalm-param E $element
+     * @param mixed $element
      */
-    public function push(object $element) : void;
+    public function push($element) : void;
 }

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Phpsol\Collection;
 
 /**
- * @template K as object
- * @template E as object
+ * @template K
+ * @template E
  *
  * @template-extends Collection<KeyValuePair<K, E>>
  *
@@ -21,13 +21,16 @@ interface Map extends Collection
 
     /**
      * @psalm-param K $key
+     * @param mixed $key
      *
      * @psalm-return E $element
+     * @return mixed
      */
-    public function get(object $key) : object;
+    public function get($key);
 
     /**
      * @psalm-param K $key
+     * @param mixed $key
      */
-    public function remove(object $key) : void;
+    public function remove($key) : void;
 }

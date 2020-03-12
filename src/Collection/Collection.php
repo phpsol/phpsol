@@ -11,7 +11,7 @@ use Traversable;
 /**
  * A collection of elements of the same type.
  *
- * @template E as object
+ * @template E
  *
  * @template-extends IteratorAggregate<array-key, E>
  *
@@ -21,10 +21,11 @@ interface Collection extends Countable, IteratorAggregate
 {
     /**
      * @psalm-param E $element
+     * @param mixed $element
      *
      * @psalm-pure
      */
-    public function contains(object $element) : bool;
+    public function contains($element) : bool;
 
     /**
      * @psalm-param Collection<E> $collection
@@ -48,7 +49,7 @@ interface Collection extends Countable, IteratorAggregate
 
     /**
      * @psalm-return array<array-key, E>
-     * @return array<int|string, object>
+     * @return array<int|string, mixed>
      *
      * @psalm-pure
      */

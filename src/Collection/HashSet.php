@@ -23,14 +23,14 @@ final class HashSet implements Set
 {
     /**
      * @psalm-var array<string, E>
-     * @var array<string, object>
+     * @var array<string, mixed>
      */
     private $elements = [];
 
     /**
      * @psalm-param class-string<E> $class
      * @psalm-param array<array-key, E> $elements
-     * @param array<string|int, object> $elements
+     * @param array<mixed> $elements
      *
      * @throws DuplicateElement
      */
@@ -42,11 +42,9 @@ final class HashSet implements Set
     }
 
     /**
-     * @psalm-param E $element
-     *
-     * @throws DuplicateElement
+     * @inheritDoc
      */
-    public function add(object $element) : void
+    public function add($element) : void
     {
         if ($this->contains($element)) {
             throw DuplicateElement::create();
@@ -58,7 +56,7 @@ final class HashSet implements Set
     /**
      * @inheritDoc
      */
-    public function remove(object $element) : void
+    public function remove($element) : void
     {
         if (!$this->contains($element)) {
             throw ElementNotFound::create();
@@ -68,7 +66,7 @@ final class HashSet implements Set
     }
 
     /**
-     * @psalm-return Traversable<array-key, E>
+     * @inheritDoc
      */
     public function getIterator() : Traversable
     {
@@ -86,19 +84,19 @@ final class HashSet implements Set
     }
 
     /**
-     * @psalm-param E $element
+     * @inheritDoc
      *
-     * @psalm-pure
+     * @psalm-param E $element
      */
-    public function contains(object $element) : bool
+    public function contains($element) : bool
     {
         return isset($this->elements[$this->hash($element)]);
     }
 
     /**
-     * @psalm-param Collection<E> $collection
+     * @inheritDoc
      *
-     * @psalm-pure
+     * @psalm-param Collection<E> $collection
      */
     public function equals(Collection $collection) : bool
     {
@@ -121,8 +119,7 @@ final class HashSet implements Set
     }
 
     /**
-     * @psalm-return list<E>
-     * @return array<int, object>
+     * @inheritDoc
      */
     public function toArray() : array
     {
