@@ -7,6 +7,8 @@ namespace Phpsol\Collection;
 /**
  * @template K as object
  * @template V as object
+ *
+ * @psalm-pure
  */
 final class KeyValuePair
 {
