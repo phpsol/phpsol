@@ -160,8 +160,6 @@ final class ArraySequence implements Sequence
 
     /**
      * @psalm-return Traversable<int, E>
-     *
-     * @psalm-pure
      */
     public function getIterator() : Traversable
     {

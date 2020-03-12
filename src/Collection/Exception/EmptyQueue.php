@@ -6,6 +6,9 @@ namespace Phpsol\Collection\Exception;
 
 use UnexpectedValueException;
 
+/**
+ * @psalm-external-mutation-free
+ */
 final class EmptyQueue extends UnexpectedValueException
 {
 }

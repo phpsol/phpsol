@@ -69,8 +69,6 @@ final class HashSet implements Set
 
     /**
      * @psalm-return Traversable<array-key, E>
-     *
-     * @psalm-pure
      */
     public function getIterator() : Traversable
     {

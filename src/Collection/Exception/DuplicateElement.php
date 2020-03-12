@@ -11,9 +11,6 @@ use InvalidArgumentException;
  */
 final class DuplicateElement extends InvalidArgumentException
 {
-    /**
-     * @psalm-pure
-     */
     public static function create() : self
     {
         return new self('Element already exists in the set.');
