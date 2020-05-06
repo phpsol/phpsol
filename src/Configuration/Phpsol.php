@@ -6,13 +6,12 @@ namespace Phpsol\Configuration;
 
 final class Phpsol
 {
-    /** @var Assertions */
-    private static $assertions;
+    private static RuntimeAssertions $assertions;
 
-    public static function runtimeAssertions() : Assertions
+    public static function runtimeAssertions() : RuntimeAssertions
     {
         if (self::$assertions === null) {
-            self::$assertions = new Assertions(true);
+            self::$assertions = new RuntimeAssertions(true);
         }
 
         return self::$assertions;

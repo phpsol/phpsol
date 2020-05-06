@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Phpsol\Configuration;
 
-final class Assertions
+final class RuntimeAssertions
 {
-    /** @var bool */
-    private $enabled;
+    private bool $enabled;
 
     public function __construct(bool $enabled)
     {
