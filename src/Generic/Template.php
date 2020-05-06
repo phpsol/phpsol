@@ -4,22 +4,24 @@ declare(strict_types=1);
 
 namespace Phpsol\Generic;
 
-use Phpsol\Type\MixedType;
+use Phpsol\Generic\Exception\MismatchedTemplate;
+use Phpsol\Type\TMixed;
 use Phpsol\Type\Type;
+use Phpsol\Type\TypeResolver;
 
 final class Template
 {
-    private Type $asType;
-    private ?Type $initialType;
+    private Type $superType;
+    private ?Type $type;
 
     private function __construct(Type $type)
     {
-        $this->asType = $type;
+        $this->superType = $type;
     }
 
     public static function mixed() : self
     {
-        return new self(new MixedType());
+        return new self(new TMixed());
     }
 
     public static function as(Type $type) : self
@@ -32,13 +34,13 @@ final class Template
      */
     public function initialize($value) : void
     {
-        $intialType = TypeResolver::resolve($value);
+        $type = TypeResolver::resolve($value);
 
-        if (!$initialType->isOf($this->asType)) {
-            // throw exception
+        if (!TypeResolver::isOf($type, $this->superType)) {
+            throw MismatchedTemplate::mismatchedType($this->superType, $type);
         }
 
-        $this->initialType = $initialType;
+        $this->type = $type;
     }
 
     /**
@@ -46,9 +48,13 @@ final class Template
      */
     public function match($value) : bool
     {
+        if ($this->type === null) {
+            $this->initialize($value);
+        }
+
         $valueType = TypeResolver::resolve($value);
 
-        return $valueType->isOf($this->initialType);
+        return TypeResolver::isOf($valueType, $this->type);
     }
 
     /**
