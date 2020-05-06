@@ -9,7 +9,7 @@ final class Phpsol
     /** @var Assertions */
     private static $assertions;
 
-    public static function assertions() : Assertions
+    public static function runtimeAssertions() : Assertions
     {
         if (self::$assertions === null) {
             self::$assertions = new Assertions(true);
