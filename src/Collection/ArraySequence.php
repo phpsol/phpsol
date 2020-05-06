@@ -7,6 +7,9 @@ namespace Phpsol\Collection;
 use ArrayIterator;
 use Phpsol\Collection\Exception\ElementNotFound;
 use Phpsol\Collection\Exception\IndexOutOfBounds;
+use Phpsol\Configuration\Phpsol;
+use Phpsol\Generic\Generic;
+use Phpsol\Generic\Template;
 use Traversable;
 use function array_splice;
 use function array_values;
@@ -22,11 +25,15 @@ use function is_int;
  */
 final class ArraySequence implements Sequence
 {
+    use Generic;
+
+    private const TEMPLATE_E = 'E';
+
     /**
      * @psalm-var list<E>
      * @var array<int, mixed>
      */
-    private $elements;
+    private array $elements;
 
     /**
      * @psalm-param array<array-key, E> $elements
@@ -34,6 +41,10 @@ final class ArraySequence implements Sequence
      */
     public function __construct(array $elements = [])
     {
+        if (Phpsol::runtimeAssertions()->isEnabled()) {
+            $this->__template(self::TEMPLATE_E)->matchAll($elements);
+        }
+
         $this->elements = array_values($elements);
     }
 
@@ -42,6 +53,10 @@ final class ArraySequence implements Sequence
      */
     public function add($element) : void
     {
+        if (Phpsol::runtimeAssertions()->isEnabled()) {
+            $this->__template(self::TEMPLATE_E)->match($element);
+        }
+
         $this->elements[] = $element;
     }
 
@@ -50,6 +65,10 @@ final class ArraySequence implements Sequence
      */
     public function addAt(int $index, $element) : void
     {
+        if (Phpsol::runtimeAssertions()->isEnabled()) {
+            $this->__template(self::TEMPLATE_E)->match($element);
+        }
+
         $size = $this->count();
         if ($index < 0 || $index > $size) {
             throw IndexOutOfBounds::create($index, $size);
@@ -76,6 +95,10 @@ final class ArraySequence implements Sequence
      */
     public function remove($element) : void
     {
+        if (Phpsol::runtimeAssertions()->isEnabled()) {
+            $this->__template(self::TEMPLATE_E)->match($element);
+        }
+
         if (!$this->contains($element)) {
             throw ElementNotFound::create();
         }
@@ -101,6 +124,10 @@ final class ArraySequence implements Sequence
      */
     public function indexOf($element) : int
     {
+        if (Phpsol::runtimeAssertions()->isEnabled()) {
+            $this->__template(self::TEMPLATE_E)->match($element);
+        }
+
         foreach ($this->elements as $index => $_element) {
             if ($_element === $element) {
                 return $index;
@@ -117,6 +144,10 @@ final class ArraySequence implements Sequence
      */
     public function contains($element) : bool
     {
+        if (Phpsol::runtimeAssertions()->isEnabled()) {
+            $this->__template(self::TEMPLATE_E)->match($element);
+        }
+
         foreach ($this->elements as $_element) {
             if ($_element === $element) {
                 return true;
@@ -180,5 +211,15 @@ final class ArraySequence implements Sequence
     public function toArray() : array
     {
         return array_values($this->elements);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function __templates() : array
+    {
+        return [
+            self::TEMPLATE_E => Template::mixed(),
+        ];
     }
 }
