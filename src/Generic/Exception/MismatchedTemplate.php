@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Phpsol\Generic\Exception;
 
-use Phpsol\Type\Type;
+use Phpsol\Generic\Type;
 use UnexpectedValueException;
+
 use function sprintf;
 
 final class MismatchedTemplate extends UnexpectedValueException

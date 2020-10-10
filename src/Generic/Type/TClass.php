@@ -2,11 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Phpsol\Type;
+namespace Phpsol\Generic\Type;
 
 use InvalidArgumentException;
+use Phpsol\Generic\Type;
+
 use function class_exists;
 use function interface_exists;
+use function is_a;
 use function sprintf;
 
 final class TClass implements Type
@@ -33,8 +36,12 @@ final class TClass implements Type
         return $this->class;
     }
 
-    public function parent() : ?Type
+    public function isAssignable(Type $type) : bool
     {
-        return new TObject();
+        if ($type instanceof self) {
+            return is_a($this->toString(), $type->toString(), true);
+        }
+
+        return (new TObject())->isAssignable($type);
     }
 }

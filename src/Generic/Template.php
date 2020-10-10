@@ -5,14 +5,16 @@ declare(strict_types=1);
 namespace Phpsol\Generic;
 
 use Phpsol\Generic\Exception\MismatchedTemplate;
-use Phpsol\Type\TMixed;
-use Phpsol\Type\Type;
-use Phpsol\Type\TypeResolver;
+use Phpsol\Generic\Type\Factory;
+use Phpsol\Generic\Type\TMixed;
 
+/**
+ * @psalm-external-mutation-free
+ */
 final class Template
 {
     private Type $superType;
-    private ?Type $type;
+    private ?Type $type = null;
 
     private function __construct(Type $type)
     {
@@ -34,9 +36,9 @@ final class Template
      */
     public function initialize($value) : void
     {
-        $type = TypeResolver::resolve($value);
+        $type = Factory::fromValue($value);
 
-        if (!TypeResolver::isOf($type, $this->superType)) {
+        if (!$type->isAssignable($this->superType)) {
             throw MismatchedTemplate::mismatchedType($this->superType, $type);
         }
 
@@ -52,9 +54,9 @@ final class Template
             $this->initialize($value);
         }
 
-        $valueType = TypeResolver::resolve($value);
+        $valueType = Factory::fromValue($value);
 
-        return TypeResolver::isOf($valueType, $this->type);
+        return $valueType->isAssignable($this->type);
     }
 
     /**

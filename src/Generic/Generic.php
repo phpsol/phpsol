@@ -12,7 +12,7 @@ trait Generic
     /**
      * @throws UndefinedTemplate
      */
-    protected function __template(string $name) : Template
+    final protected function __template(string $name) : Template
     {
         if (!array_key_exists($name, $this->__templates())) {
             throw UndefinedTemplate::withName($name);

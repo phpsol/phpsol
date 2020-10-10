@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Phpsol\Type;
+namespace Phpsol\Generic\Type;
+
+use Phpsol\Generic\Type;
 
 use function class_exists;
 use function get_class;
@@ -14,12 +16,12 @@ use function is_int;
 use function is_object;
 use function is_string;
 
-final class TypeResolver
+final class Factory
 {
     /**
      * @param mixed $value
      */
-    public static function resolve($value) : Type
+    public static function fromValue($value) : Type
     {
         if ($value === null) {
             return new TNull();
@@ -54,18 +56,5 @@ final class TypeResolver
         }
 
         return new TMixed();
-    }
-
-    public static function isOf(Type $source, Type $target) : bool
-    {
-        if (get_class($source) === get_class($target)) {
-            return true;
-        }
-
-        if ($source->parent() === null) {
-            return false;
-        }
-
-        return self::isOf($source->parent(), $target);
     }
 }
