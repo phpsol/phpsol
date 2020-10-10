@@ -39,7 +39,7 @@ jobs:
 
             -   name: PHPCS
                 run: |
-                    vendor/bin/phpcs src tests
+                    vendor/bin/phpcs src
 
             -   name: Composer Monolith
                 run: |

@@ -11,6 +11,7 @@ use Phpsol\Configuration\Phpsol;
 use Phpsol\Generic\Generic;
 use Phpsol\Generic\Template;
 use Traversable;
+
 use function array_splice;
 use function array_values;
 use function count;
@@ -28,7 +29,6 @@ final class ArraySequence implements Sequence
     use Generic;
 
     private const TEMPLATE_E = 'E';
-
     /**
      * @psalm-var list<E>
      * @var array<int, mixed>
@@ -37,7 +37,8 @@ final class ArraySequence implements Sequence
 
     /**
      * @psalm-param array<array-key, E> $elements
-     * @param array<int|string, mixed> $elements
+     *
+     * @param array<int|string, mixed>  $elements
      */
     public function __construct(array $elements = [])
     {
@@ -215,6 +216,8 @@ final class ArraySequence implements Sequence
 
     /**
      * @inheritDoc
+     *
+     * @return array<string, Template>
      */
     protected function __templates() : array
     {

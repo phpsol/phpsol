@@ -60,6 +60,7 @@ final class HashSetTest extends TestCase
 
     public function testAdd() : void
     {
+        /** @var HashSet<object> $set */
         $set = new HashSet();
         $element = new stdClass();
 
@@ -72,6 +73,7 @@ final class HashSetTest extends TestCase
 
     public function testAddDuplicateElement() : void
     {
+        /** @var HashSet<object> $set */
         $set = new HashSet();
         $element = new stdClass();
 
@@ -84,6 +86,7 @@ final class HashSetTest extends TestCase
 
     public function testContains() : void
     {
+        /** @var HashSet<object> $set */
         $set = new HashSet();
         $element = new stdClass();
 
@@ -96,6 +99,7 @@ final class HashSetTest extends TestCase
 
     public function testRemove() : void
     {
+        /** @var HashSet<object> $set */
         $set = new HashSet();
         $element = new stdClass();
 
@@ -110,6 +114,7 @@ final class HashSetTest extends TestCase
 
     public function testToArray() : void
     {
+        /** @var HashSet<object> $set */
         $set = new HashSet();
         $elementA = new stdClass();
         $elementB = new stdClass();
@@ -126,6 +131,7 @@ final class HashSetTest extends TestCase
 
     public function testCount() : void
     {
+        /** @var HashSet<object> $set */
         $set = new HashSet();
 
         self::assertCount(0, $set);
@@ -137,6 +143,7 @@ final class HashSetTest extends TestCase
 
     public function testIsEmpty() : void
     {
+        /** @var HashSet<object> $set */
         $set = new HashSet();
 
         self::assertTrue($set->isEmpty());

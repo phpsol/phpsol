@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="3.16@d03e5ef057d6adc656c0ff7e166c50b73b4f48f3">
+  <file src="src/Collection/ArraySequence.php">
+    <ImpureMethodCall occurrences="6">
+      <code>match</code>
+      <code>match</code>
+      <code>match</code>
+      <code>match</code>
+      <code>match</code>
+      <code>matchAll</code>
+    </ImpureMethodCall>
+  </file>
+  <file src="src/Collection/Tests/HashSetTest.php">
+    <PropertyNotSetInConstructor occurrences="2">
+      <code>HashSetTest</code>
+      <code>HashSetTest</code>
+    </PropertyNotSetInConstructor>
+  </file>
+</files>

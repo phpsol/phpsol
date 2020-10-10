@@ -20,7 +20,7 @@ final class TClass implements Type
     private string $class;
 
     /**
-     * @psalm-param class-string $class
+     * @psalm-param string $class
      */
     public function __construct(string $class)
     {

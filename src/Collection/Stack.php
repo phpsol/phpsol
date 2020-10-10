@@ -41,7 +41,8 @@ interface Stack extends Collection
      * Pushes an element on top of the stack.
      *
      * @psalm-param E $element
-     * @param mixed $element
+     *
+     * @param mixed   $element
      */
     public function push($element) : void;
 }

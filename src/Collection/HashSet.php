@@ -8,6 +8,7 @@ use ArrayIterator;
 use Phpsol\Collection\Exception\DuplicateElement;
 use Phpsol\Collection\Exception\ElementNotFound;
 use Traversable;
+
 use function array_values;
 use function count;
 use function spl_object_hash;
@@ -28,9 +29,9 @@ final class HashSet implements Set
     private array $elements = [];
 
     /**
-     * @psalm-param class-string<E> $class
      * @psalm-param array<array-key, E> $elements
-     * @param array<mixed> $elements
+     *
+     * @param array<mixed>              $elements
      *
      * @throws DuplicateElement
      */

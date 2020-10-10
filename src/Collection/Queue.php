@@ -31,7 +31,8 @@ interface Queue extends Collection
      * Queues an element in the back of the queue.
      *
      * @psalm-param E $element
-     * @param mixed $element
+     *
+     * @param mixed   $element
      */
     public function queue($element) : void;
 }
