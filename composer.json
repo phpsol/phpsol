@@ -43,11 +43,6 @@
             "Phpsol\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Phpsol\\Tests\\": "tests/"
-        }
-    },
     "scripts": {
         "test": [
             "vendor/bin/phpunit tests --colors"
