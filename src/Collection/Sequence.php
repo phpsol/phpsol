@@ -48,7 +48,7 @@ interface Sequence extends Collection
     public function get(int $index);
 
     /**
-     * Removes the first occurance of the element from the sequence.
+     * Removes the first occurrence of the element from the sequence.
      *
      * @psalm-param E $element
      * @param mixed $element

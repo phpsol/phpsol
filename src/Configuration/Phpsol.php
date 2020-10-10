@@ -6,7 +6,7 @@ namespace Phpsol\Configuration;
 
 final class Phpsol
 {
-    private static RuntimeAssertions $assertions;
+    private static ?RuntimeAssertions $assertions = null;
 
     public static function runtimeAssertions() : RuntimeAssertions
     {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phpsol\Collection;
 
-use Phpsol\Collection\Stack\Exception\EmptyStack;
+use Phpsol\Collection\Exception\EmptyStack;
 
 /**
  * A first in, last out collection.
