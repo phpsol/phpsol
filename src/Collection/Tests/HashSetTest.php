@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phpsol\Tests\Collection;
+namespace Phpsol\Collection\Tests;
 
 use Phpsol\Collection\Exception\DuplicateElement;
 use Phpsol\Collection\HashSet;

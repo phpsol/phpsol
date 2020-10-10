@@ -1,0 +1,33 @@
+{
+    "name": "phpsol/collection",
+    "type": "library",
+    "license": "MIT",
+    "description": "A library for adding common collection types to php",
+    "homepage": "https://github.com/phpsol/collection",
+    "authors": [
+        {
+            "name": "Daniël Brekelmans",
+            "homepage": "https://github.com/dbrekelmans"
+        },
+        {
+            "name": "Maarten Nusteling",
+            "homepage": "https://github.com/nusje2000"
+        }
+    ],
+    "require": {
+        "php": "^7.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Phpsol\\Collection\\": "./"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Phpsol\\Collection\\Tests\\": "./Tests"
+        }
+    }
+}
