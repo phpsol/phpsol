@@ -6,6 +6,7 @@ namespace Phpsol\Generic;
 
 use LogicException;
 use Phpsol\Generic\Exception\MismatchedTemplate;
+use Phpsol\Generic\Exception\TemplateAlreadyInitialized;
 use Phpsol\Generic\Type\Factory;
 use Phpsol\Generic\Type\TMixed;
 
@@ -14,12 +15,12 @@ use Phpsol\Generic\Type\TMixed;
  */
 final class Template
 {
-    private Type $superType;
+    private Type $definition;
     private ?Type $type = null;
 
-    private function __construct(Type $type)
+    private function __construct(Type $definition)
     {
-        $this->superType = $type;
+        $this->definition = $definition;
     }
 
     public static function mixed() : self
@@ -33,14 +34,17 @@ final class Template
     }
 
     /**
-     * @param mixed $value
+     * @throws TemplateAlreadyInitialized
+     * @throws MismatchedTemplate
      */
-    public function initialize($value) : void
+    public function initialize(Type $type) : void
     {
-        $type = Factory::fromValue($value);
+        if ($this->type !== null) {
+            throw TemplateAlreadyInitialized::withType($this->type);
+        }
 
-        if (!$type->isAssignable($this->superType)) {
-            throw MismatchedTemplate::mismatchedType($this->superType, $type);
+        if (!$type->isAssignable($this->definition)) {
+            throw MismatchedTemplate::mismatchedType($this->definition, $type);
         }
 
         $this->type = $type;
@@ -48,30 +52,34 @@ final class Template
 
     /**
      * @param mixed $value
+     *
+     * @throws TemplateAlreadyInitialized
+     * @throws MismatchedTemplate
      */
-    public function match($value) : bool
+    public function match($value) : void
     {
-        if ($this->type === null) {
-            $this->initialize($value);
-        }
-
         $valueType = Factory::fromValue($value);
 
-        return $valueType->isAssignable($this->type);
+        if ($this->type === null) {
+            $this->initialize($valueType);
+        }
+
+        if (!$valueType->isAssignable($this->type)) {
+            throw MismatchedTemplate::mismatchedType($this->type, $valueType);
+        }
     }
 
     /**
      * @param iterable<mixed> $values
+     *
+     * @throws TemplateAlreadyInitialized
+     * @throws MismatchedTemplate
      */
-    public function matchAll(iterable $values) : bool
+    public function matchAll(iterable $values) : void
     {
         /** @var mixed $value */
         foreach ($values as $value) {
-            if (!$this->match($value)) {
-                return false;
-            }
+            $this->match($value);
         }
-
-        return true;
     }
 }

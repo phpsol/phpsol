@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Phpsol\Generic\Exception;
 
+use InvalidArgumentException;
 use Phpsol\Generic\Type;
-use UnexpectedValueException;
 
 use function sprintf;
 
-final class MismatchedTemplate extends UnexpectedValueException
+final class MismatchedTemplate extends InvalidArgumentException
 {
     public static function mismatchedType(Type $expected, Type $actual) : self
     {

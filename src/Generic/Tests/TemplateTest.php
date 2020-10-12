@@ -7,6 +7,8 @@ namespace Phpsol\Generic\Tests;
 use Phpsol\Generic\Exception\MismatchedTemplate;
 use Phpsol\Generic\Template;
 use Phpsol\Generic\Type;
+use Phpsol\Generic\Type\TInteger;
+use Phpsol\Generic\Type\TString;
 use PHPUnit\Framework\TestCase;
 
 final class TemplateTest extends TestCase
@@ -14,7 +16,7 @@ final class TemplateTest extends TestCase
     public function testInitialize() : void
     {
         $template = Template::mixed();
-        $template->initialize('');
+        $template->initialize(new TString());
 
         $this->addToAssertionCount(1);
     }
@@ -27,42 +29,48 @@ final class TemplateTest extends TestCase
         $template = Template::as($type);
 
         $this->expectException(MismatchedTemplate::class);
-        $template->initialize('');
+        $template->initialize(new TString());
     }
 
     public function testMatch() : void
     {
         $template = Template::mixed();
 
-        self::assertTrue($template->match('value'));
+        $template->match('value');
+        $this->addToAssertionCount(1);
     }
 
     public function testMatchWithInitialize() : void
     {
         $template = Template::mixed();
+        $template->initialize(new TString());
+        $template->match('');
+        $this->addToAssertionCount(1);
 
-        $template->initialize('');
-        self::assertTrue($template->match(''));
-
-        $template->initialize(1);
-        self::assertFalse($template->match(''));
+        $template = Template::mixed();
+        $template->initialize(new TInteger());
+        $this->expectException(MismatchedTemplate::class);
+        $template->match('');
     }
 
     public function testMatchAll() : void
     {
         $template = Template::mixed();
 
-        self::assertTrue($template->matchAll(['', '']));
+        $template->matchAll(['', '']);
+        $this->addToAssertionCount(1);
     }
 
     public function testMatchAllWithInitialize() : void
     {
         $template = Template::mixed();
+        $template->initialize(new TString());
+        $template->matchAll(['', '']);
+        $this->addToAssertionCount(1);
 
-        $template->initialize('');
-        self::assertTrue($template->matchAll(['', '']));
-
-        $template->initialize(1);
-        self::assertFalse($template->matchAll([1, '']));
+        $template = Template::mixed();
+        $template->initialize(new TInteger());
+        $this->expectException(MismatchedTemplate::class);
+        $template->matchAll([1, '']);
     }
 }

@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Phpsol\Generic\Exception;
 
-use UnexpectedValueException;
+use InvalidArgumentException;
+
 use function sprintf;
 
-final class UndefinedTemplate extends UnexpectedValueException
+final class UndefinedTemplate extends InvalidArgumentException
 {
     public static function withName(string $name) : self
     {
