@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phpsol\Generic;
 
 use LogicException;
+use Phpsol\Configuration\Phpsol;
 use Phpsol\Generic\Exception\MismatchedTemplate;
 use Phpsol\Generic\Exception\TemplateAlreadyInitialized;
 use Phpsol\Generic\Type\Factory;
@@ -39,6 +40,10 @@ final class Template
      */
     public function initialize(Type $type) : void
     {
+        if (!Phpsol::runtimeAssertions()->isEnabled()) {
+            return;
+        }
+
         if ($this->type !== null) {
             throw TemplateAlreadyInitialized::withType($this->type);
         }
@@ -58,6 +63,10 @@ final class Template
      */
     public function match($value) : void
     {
+        if (!Phpsol::runtimeAssertions()->isEnabled()) {
+            return;
+        }
+
         $valueType = Factory::fromValue($value);
 
         if ($this->type === null) {

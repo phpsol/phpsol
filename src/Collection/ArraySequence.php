@@ -43,13 +43,11 @@ final class ArraySequence implements Sequence
      */
     public function __construct(array $elements = [], ?Type $elementType = null)
     {
-        if (Phpsol::runtimeAssertions()->isEnabled()) {
-            if ($elementType !== null) {
-                $this->__template(self::TEMPLATE_E)->initialize($elementType);
-            }
-
-            $this->__template(self::TEMPLATE_E)->matchAll($elements);
+        if ($elementType !== null) {
+            $this->__template(self::TEMPLATE_E)->initialize($elementType);
         }
+
+        $this->__template(self::TEMPLATE_E)->matchAll($elements);
 
         $this->elements = array_values($elements);
     }
@@ -69,9 +67,7 @@ final class ArraySequence implements Sequence
      */
     public function add($element) : void
     {
-        if (Phpsol::runtimeAssertions()->isEnabled()) {
-            $this->__template(self::TEMPLATE_E)->match($element);
-        }
+        $this->__template(self::TEMPLATE_E)->match($element);
 
         $this->elements[] = $element;
     }
@@ -81,9 +77,7 @@ final class ArraySequence implements Sequence
      */
     public function addAt(int $index, $element) : void
     {
-        if (Phpsol::runtimeAssertions()->isEnabled()) {
-            $this->__template(self::TEMPLATE_E)->match($element);
-        }
+        $this->__template(self::TEMPLATE_E)->match($element);
 
         $size = $this->count();
         if ($index < 0 || $index > $size) {
@@ -111,9 +105,7 @@ final class ArraySequence implements Sequence
      */
     public function remove($element) : void
     {
-        if (Phpsol::runtimeAssertions()->isEnabled()) {
-            $this->__template(self::TEMPLATE_E)->match($element);
-        }
+        $this->__template(self::TEMPLATE_E)->match($element);
 
         if (!$this->contains($element)) {
             throw ElementNotFound::create();
@@ -140,9 +132,7 @@ final class ArraySequence implements Sequence
      */
     public function indexOf($element) : int
     {
-        if (Phpsol::runtimeAssertions()->isEnabled()) {
-            $this->__template(self::TEMPLATE_E)->match($element);
-        }
+        $this->__template(self::TEMPLATE_E)->match($element);
 
         foreach ($this->elements as $index => $_element) {
             if ($_element === $element) {
@@ -160,9 +150,7 @@ final class ArraySequence implements Sequence
      */
     public function contains($element) : bool
     {
-        if (Phpsol::runtimeAssertions()->isEnabled()) {
-            $this->__template(self::TEMPLATE_E)->match($element);
-        }
+        $this->__template(self::TEMPLATE_E)->match($element);
 
         foreach ($this->elements as $_element) {
             if ($_element === $element) {
